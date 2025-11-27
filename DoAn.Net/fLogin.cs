@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace DoAn.Net
 {
-    public partial class Form1 : Form
+    public partial class fLogin : Form
     {
-        public Form1()
+        public fLogin()
         {
             InitializeComponent();
         }

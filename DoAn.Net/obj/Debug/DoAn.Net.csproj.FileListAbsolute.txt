@@ -1,0 +1,12 @@
+C:\Users\rober\OneDrive\Tài liệu\DoAn.Net\DoAn.Net\bin\Debug\DoAn.Net.exe.config
+C:\Users\rober\OneDrive\Tài liệu\DoAn.Net\DoAn.Net\bin\Debug\DoAn.Net.exe
+C:\Users\rober\OneDrive\Tài liệu\DoAn.Net\DoAn.Net\bin\Debug\DoAn.Net.pdb
+C:\Users\rober\OneDrive\Tài liệu\DoAn.Net\DoAn.Net\obj\Debug\DoAn.Net.csproj.AssemblyReference.cache
+C:\Users\rober\OneDrive\Tài liệu\DoAn.Net\DoAn.Net\obj\Debug\DoAn.Net.fAdmin.resources
+C:\Users\rober\OneDrive\Tài liệu\DoAn.Net\DoAn.Net\obj\Debug\DoAn.Net.fLogin.resources
+C:\Users\rober\OneDrive\Tài liệu\DoAn.Net\DoAn.Net\obj\Debug\DoAn.Net.Properties.Resources.resources
+C:\Users\rober\OneDrive\Tài liệu\DoAn.Net\DoAn.Net\obj\Debug\DoAn.Net.csproj.GenerateResource.cache
+C:\Users\rober\OneDrive\Tài liệu\DoAn.Net\DoAn.Net\obj\Debug\DoAn.Net.csproj.CoreCompileInputs.cache
+C:\Users\rober\OneDrive\Tài liệu\DoAn.Net\DoAn.Net\obj\Debug\DoAn.Net.exe
+C:\Users\rober\OneDrive\Tài liệu\DoAn.Net\DoAn.Net\obj\Debug\DoAn.Net.pdb
+C:\Users\rober\OneDrive\Tài liệu\DoAn.Net\DoAn.Net\obj\Debug\DoAn.Net.exe.config
