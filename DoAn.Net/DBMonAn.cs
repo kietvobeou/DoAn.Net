@@ -105,5 +105,18 @@ namespace DoAn.Net
 
             return list;
         }
+        public bool IsCategoryInUse(int categoryID)
+        {
+            try
+            {
+                int? count = (int)daFood.CountFoodByCategory(categoryID);
+                return count.HasValue && count.Value > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi kiểm tra danh mục: " + ex.Message);
+                return true;
+            }
+        }
     }
 }

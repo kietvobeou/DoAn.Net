@@ -29,10 +29,22 @@
         private void InitializeComponent()
         {
             this.tpReport = new System.Windows.Forms.TabPage();
-            this.btnToday = new System.Windows.Forms.Button();
+            this.dtgvReport = new System.Windows.Forms.DataGridView();
+            this.panel29 = new System.Windows.Forms.Panel();
+            this.txtAverageBill = new System.Windows.Forms.TextBox();
+            this.txtTotalRevenue = new System.Windows.Forms.TextBox();
+            this.txtTotalBills = new System.Windows.Forms.TextBox();
+            this.lblAverageBill = new System.Windows.Forms.Label();
+            this.lblTotalRevenue = new System.Windows.Forms.Label();
+            this.lblTotalBills = new System.Windows.Forms.Label();
+            this.btnExportExcel = new System.Windows.Forms.Button();
+            this.btnViewReport = new System.Windows.Forms.Button();
             this.panel28 = new System.Windows.Forms.Panel();
+            this.btnLastMonth = new System.Windows.Forms.Button();
+            this.btnThisMonth = new System.Windows.Forms.Button();
             this.dtpFromReport = new System.Windows.Forms.DateTimePicker();
             this.dtpToReport = new System.Windows.Forms.DateTimePicker();
+            this.btnToday = new System.Windows.Forms.Button();
             this.tpAccount = new System.Windows.Forms.TabPage();
             this.panel24 = new System.Windows.Forms.Panel();
             this.btnResetPassword = new System.Windows.Forms.Button();
@@ -63,7 +75,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtIDTable = new System.Windows.Forms.TextBox();
             this.panel15 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvBan = new System.Windows.Forms.DataGridView();
             this.panel14 = new System.Windows.Forms.Panel();
             this.btnSua2 = new System.Windows.Forms.Button();
             this.btnXoa2 = new System.Windows.Forms.Button();
@@ -75,7 +87,7 @@
             this.txtTenDoanhMuc = new System.Windows.Forms.TextBox();
             this.panel17 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtMaDoanhMuc = new System.Windows.Forms.TextBox();
             this.panel12 = new System.Windows.Forms.Panel();
             this.dgvDoanhMuc = new System.Windows.Forms.DataGridView();
             this.panel11 = new System.Windows.Forms.Panel();
@@ -102,6 +114,7 @@
             this.btnTim = new System.Windows.Forms.Button();
             this.txtSearchFood = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnLuu = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
@@ -118,20 +131,24 @@
             this.txbPageBill = new System.Windows.Forms.TextBox();
             this.dgvBill = new System.Windows.Forms.DataGridView();
             this.tpTable = new System.Windows.Forms.TabControl();
-            this.btnThisMonth = new System.Windows.Forms.Button();
-            this.btnLastMonth = new System.Windows.Forms.Button();
-            this.panel29 = new System.Windows.Forms.Panel();
-            this.btnViewReport = new System.Windows.Forms.Button();
-            this.btnExportExcel = new System.Windows.Forms.Button();
-            this.lblTotalBills = new System.Windows.Forms.Label();
-            this.lblTotalRevenue = new System.Windows.Forms.Label();
-            this.lblAverageBill = new System.Windows.Forms.Label();
-            this.txtTotalBills = new System.Windows.Forms.TextBox();
-            this.txtTotalRevenue = new System.Windows.Forms.TextBox();
-            this.txtAverageBill = new System.Windows.Forms.TextBox();
-            this.dtgvReport = new System.Windows.Forms.DataGridView();
-            this.btnXem = new System.Windows.Forms.Button();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnLuuAccount = new System.Windows.Forms.Button();
+            this.btnLuu1 = new System.Windows.Forms.Button();
+            this.btnLuu2 = new System.Windows.Forms.Button();
+            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDanhMuc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tenDoanhMuc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tpReport.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgvReport)).BeginInit();
+            this.panel29.SuspendLayout();
             this.panel28.SuspendLayout();
             this.tpAccount.SuspendLayout();
             this.panel24.SuspendLayout();
@@ -148,7 +165,7 @@
             this.panel19.SuspendLayout();
             this.panel20.SuspendLayout();
             this.panel15.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBan)).BeginInit();
             this.panel14.SuspendLayout();
             this.tpCategory.SuspendLayout();
             this.panel13.SuspendLayout();
@@ -173,8 +190,6 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).BeginInit();
             this.tpTable.SuspendLayout();
-            this.panel29.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgvReport)).BeginInit();
             this.SuspendLayout();
             // 
             // tpReport
@@ -190,14 +205,97 @@
             this.tpReport.Text = "Report";
             this.tpReport.UseVisualStyleBackColor = true;
             // 
-            // btnToday
+            // dtgvReport
             // 
-            this.btnToday.Location = new System.Drawing.Point(309, 3);
-            this.btnToday.Name = "btnToday";
-            this.btnToday.Size = new System.Drawing.Size(107, 39);
-            this.btnToday.TabIndex = 1;
-            this.btnToday.Text = "Hôm nay";
-            this.btnToday.UseVisualStyleBackColor = true;
+            this.dtgvReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgvReport.Location = new System.Drawing.Point(6, 60);
+            this.dtgvReport.Name = "dtgvReport";
+            this.dtgvReport.RowHeadersWidth = 51;
+            this.dtgvReport.RowTemplate.Height = 24;
+            this.dtgvReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dtgvReport.Size = new System.Drawing.Size(577, 331);
+            this.dtgvReport.TabIndex = 14;
+            // 
+            // panel29
+            // 
+            this.panel29.Controls.Add(this.txtAverageBill);
+            this.panel29.Controls.Add(this.txtTotalRevenue);
+            this.panel29.Controls.Add(this.txtTotalBills);
+            this.panel29.Controls.Add(this.lblAverageBill);
+            this.panel29.Controls.Add(this.lblTotalRevenue);
+            this.panel29.Controls.Add(this.lblTotalBills);
+            this.panel29.Controls.Add(this.btnExportExcel);
+            this.panel29.Controls.Add(this.btnViewReport);
+            this.panel29.Location = new System.Drawing.Point(594, 60);
+            this.panel29.Name = "panel29";
+            this.panel29.Size = new System.Drawing.Size(168, 331);
+            this.panel29.TabIndex = 3;
+            // 
+            // txtAverageBill
+            // 
+            this.txtAverageBill.Location = new System.Drawing.Point(37, 292);
+            this.txtAverageBill.Name = "txtAverageBill";
+            this.txtAverageBill.Size = new System.Drawing.Size(100, 22);
+            this.txtAverageBill.TabIndex = 13;
+            // 
+            // txtTotalRevenue
+            // 
+            this.txtTotalRevenue.Location = new System.Drawing.Point(37, 223);
+            this.txtTotalRevenue.Name = "txtTotalRevenue";
+            this.txtTotalRevenue.Size = new System.Drawing.Size(100, 22);
+            this.txtTotalRevenue.TabIndex = 12;
+            // 
+            // txtTotalBills
+            // 
+            this.txtTotalBills.Location = new System.Drawing.Point(37, 155);
+            this.txtTotalBills.Name = "txtTotalBills";
+            this.txtTotalBills.Size = new System.Drawing.Size(100, 22);
+            this.txtTotalBills.TabIndex = 11;
+            // 
+            // lblAverageBill
+            // 
+            this.lblAverageBill.AutoSize = true;
+            this.lblAverageBill.Location = new System.Drawing.Point(34, 261);
+            this.lblAverageBill.Name = "lblAverageBill";
+            this.lblAverageBill.Size = new System.Drawing.Size(73, 16);
+            this.lblAverageBill.TabIndex = 10;
+            this.lblAverageBill.Text = "Trung bình:";
+            // 
+            // lblTotalRevenue
+            // 
+            this.lblTotalRevenue.AutoSize = true;
+            this.lblTotalRevenue.Location = new System.Drawing.Point(34, 193);
+            this.lblTotalRevenue.Name = "lblTotalRevenue";
+            this.lblTotalRevenue.Size = new System.Drawing.Size(103, 16);
+            this.lblTotalRevenue.TabIndex = 9;
+            this.lblTotalRevenue.Text = "Tổng doanh thu:";
+            // 
+            // lblTotalBills
+            // 
+            this.lblTotalBills.AutoSize = true;
+            this.lblTotalBills.Location = new System.Drawing.Point(32, 125);
+            this.lblTotalBills.Name = "lblTotalBills";
+            this.lblTotalBills.Size = new System.Drawing.Size(112, 16);
+            this.lblTotalBills.TabIndex = 8;
+            this.lblTotalBills.Text = "Tổng số hóa đơn:";
+            // 
+            // btnExportExcel
+            // 
+            this.btnExportExcel.Location = new System.Drawing.Point(37, 69);
+            this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.Size = new System.Drawing.Size(107, 39);
+            this.btnExportExcel.TabIndex = 7;
+            this.btnExportExcel.Text = "Xuất Excel";
+            this.btnExportExcel.UseVisualStyleBackColor = true;
+            // 
+            // btnViewReport
+            // 
+            this.btnViewReport.Location = new System.Drawing.Point(37, 12);
+            this.btnViewReport.Name = "btnViewReport";
+            this.btnViewReport.Size = new System.Drawing.Size(107, 39);
+            this.btnViewReport.TabIndex = 6;
+            this.btnViewReport.Text = "Xem";
+            this.btnViewReport.UseVisualStyleBackColor = true;
             // 
             // panel28
             // 
@@ -210,6 +308,24 @@
             this.panel28.Name = "panel28";
             this.panel28.Size = new System.Drawing.Size(759, 51);
             this.panel28.TabIndex = 2;
+            // 
+            // btnLastMonth
+            // 
+            this.btnLastMonth.Location = new System.Drawing.Point(628, 3);
+            this.btnLastMonth.Name = "btnLastMonth";
+            this.btnLastMonth.Size = new System.Drawing.Size(107, 39);
+            this.btnLastMonth.TabIndex = 5;
+            this.btnLastMonth.Text = "Tháng trước";
+            this.btnLastMonth.UseVisualStyleBackColor = true;
+            // 
+            // btnThisMonth
+            // 
+            this.btnThisMonth.Location = new System.Drawing.Point(473, 3);
+            this.btnThisMonth.Name = "btnThisMonth";
+            this.btnThisMonth.Size = new System.Drawing.Size(107, 39);
+            this.btnThisMonth.TabIndex = 4;
+            this.btnThisMonth.Text = "Tháng Này";
+            this.btnThisMonth.UseVisualStyleBackColor = true;
             // 
             // dtpFromReport
             // 
@@ -226,6 +342,15 @@
             this.dtpToReport.Name = "dtpToReport";
             this.dtpToReport.Size = new System.Drawing.Size(128, 22);
             this.dtpToReport.TabIndex = 3;
+            // 
+            // btnToday
+            // 
+            this.btnToday.Location = new System.Drawing.Point(309, 3);
+            this.btnToday.Name = "btnToday";
+            this.btnToday.Size = new System.Drawing.Size(107, 39);
+            this.btnToday.TabIndex = 1;
+            this.btnToday.Text = "Hôm nay";
+            this.btnToday.UseVisualStyleBackColor = true;
             // 
             // tpAccount
             // 
@@ -272,6 +397,11 @@
             // nmrLoai
             // 
             this.nmrLoai.Location = new System.Drawing.Point(142, 14);
+            this.nmrLoai.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nmrLoai.Name = "nmrLoai";
             this.nmrLoai.Size = new System.Drawing.Size(132, 22);
             this.nmrLoai.TabIndex = 3;
@@ -299,7 +429,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(7, 12);
+            this.label9.Location = new System.Drawing.Point(3, 14);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(110, 20);
             this.label9.TabIndex = 2;
@@ -325,7 +455,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(7, 12);
+            this.label10.Location = new System.Drawing.Point(3, 12);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(122, 20);
             this.label10.TabIndex = 2;
@@ -348,7 +478,12 @@
             // 
             // dgvAccount
             // 
+            this.dgvAccount.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAccount.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.UserName,
+            this.DisplayName,
+            this.Type});
             this.dgvAccount.Location = new System.Drawing.Point(0, -3);
             this.dgvAccount.Name = "dgvAccount";
             this.dgvAccount.RowHeadersWidth = 51;
@@ -359,6 +494,7 @@
             // 
             // panel22
             // 
+            this.panel22.Controls.Add(this.btnLuuAccount);
             this.panel22.Controls.Add(this.btnSua3);
             this.panel22.Controls.Add(this.btnXoa3);
             this.panel22.Controls.Add(this.btnThem3);
@@ -369,7 +505,7 @@
             // 
             // btnSua3
             // 
-            this.btnSua3.Location = new System.Drawing.Point(357, 3);
+            this.btnSua3.Location = new System.Drawing.Point(241, 3);
             this.btnSua3.Name = "btnSua3";
             this.btnSua3.Size = new System.Drawing.Size(98, 61);
             this.btnSua3.TabIndex = 3;
@@ -378,7 +514,7 @@
             // 
             // btnXoa3
             // 
-            this.btnXoa3.Location = new System.Drawing.Point(189, 3);
+            this.btnXoa3.Location = new System.Drawing.Point(126, 3);
             this.btnXoa3.Name = "btnXoa3";
             this.btnXoa3.Size = new System.Drawing.Size(98, 61);
             this.btnXoa3.TabIndex = 2;
@@ -497,25 +633,31 @@
             // 
             // panel15
             // 
-            this.panel15.Controls.Add(this.dataGridView1);
+            this.panel15.Controls.Add(this.dgvBan);
             this.panel15.Location = new System.Drawing.Point(3, 73);
             this.panel15.Name = "panel15";
             this.panel15.Size = new System.Drawing.Size(473, 315);
             this.panel15.TabIndex = 4;
             // 
-            // dataGridView1
+            // dgvBan
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(473, 312);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvBan.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvBan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBan.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idBan,
+            this.nameBan,
+            this.status});
+            this.dgvBan.Location = new System.Drawing.Point(0, 6);
+            this.dgvBan.Name = "dgvBan";
+            this.dgvBan.RowHeadersWidth = 51;
+            this.dgvBan.RowTemplate.Height = 24;
+            this.dgvBan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvBan.Size = new System.Drawing.Size(473, 306);
+            this.dgvBan.TabIndex = 0;
             // 
             // panel14
             // 
+            this.panel14.Controls.Add(this.btnLuu2);
             this.panel14.Controls.Add(this.btnSua2);
             this.panel14.Controls.Add(this.btnXoa2);
             this.panel14.Controls.Add(this.btnThem2);
@@ -526,7 +668,7 @@
             // 
             // btnSua2
             // 
-            this.btnSua2.Location = new System.Drawing.Point(356, 3);
+            this.btnSua2.Location = new System.Drawing.Point(243, 3);
             this.btnSua2.Name = "btnSua2";
             this.btnSua2.Size = new System.Drawing.Size(98, 61);
             this.btnSua2.TabIndex = 3;
@@ -535,7 +677,7 @@
             // 
             // btnXoa2
             // 
-            this.btnXoa2.Location = new System.Drawing.Point(182, 3);
+            this.btnXoa2.Location = new System.Drawing.Point(120, 3);
             this.btnXoa2.Name = "btnXoa2";
             this.btnXoa2.Size = new System.Drawing.Size(98, 61);
             this.btnXoa2.TabIndex = 2;
@@ -594,15 +736,15 @@
             // 
             // txtTenDoanhMuc
             // 
-            this.txtTenDoanhMuc.Location = new System.Drawing.Point(142, 12);
+            this.txtTenDoanhMuc.Location = new System.Drawing.Point(168, 12);
             this.txtTenDoanhMuc.Name = "txtTenDoanhMuc";
-            this.txtTenDoanhMuc.Size = new System.Drawing.Size(133, 22);
+            this.txtTenDoanhMuc.Size = new System.Drawing.Size(107, 22);
             this.txtTenDoanhMuc.TabIndex = 1;
             // 
             // panel17
             // 
             this.panel17.Controls.Add(this.label8);
-            this.panel17.Controls.Add(this.textBox3);
+            this.panel17.Controls.Add(this.txtMaDoanhMuc);
             this.panel17.Location = new System.Drawing.Point(3, 3);
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(285, 52);
@@ -618,12 +760,12 @@
             this.label8.TabIndex = 2;
             this.label8.Text = "ID:";
             // 
-            // textBox3
+            // txtMaDoanhMuc
             // 
-            this.textBox3.Location = new System.Drawing.Point(142, 12);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(133, 22);
-            this.textBox3.TabIndex = 1;
+            this.txtMaDoanhMuc.Location = new System.Drawing.Point(168, 12);
+            this.txtMaDoanhMuc.Name = "txtMaDoanhMuc";
+            this.txtMaDoanhMuc.Size = new System.Drawing.Size(107, 22);
+            this.txtMaDoanhMuc.TabIndex = 1;
             // 
             // panel12
             // 
@@ -635,17 +777,22 @@
             // 
             // dgvDoanhMuc
             // 
+            this.dgvDoanhMuc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDoanhMuc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDoanhMuc.Location = new System.Drawing.Point(3, -18);
+            this.dgvDoanhMuc.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDanhMuc,
+            this.tenDoanhMuc});
+            this.dgvDoanhMuc.Location = new System.Drawing.Point(6, 3);
             this.dgvDoanhMuc.Name = "dgvDoanhMuc";
             this.dgvDoanhMuc.RowHeadersWidth = 51;
             this.dgvDoanhMuc.RowTemplate.Height = 24;
             this.dgvDoanhMuc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDoanhMuc.Size = new System.Drawing.Size(473, 313);
+            this.dgvDoanhMuc.Size = new System.Drawing.Size(464, 309);
             this.dgvDoanhMuc.TabIndex = 0;
             // 
             // panel11
             // 
+            this.panel11.Controls.Add(this.btnLuu1);
             this.panel11.Controls.Add(this.btnSua1);
             this.panel11.Controls.Add(this.btnXoa1);
             this.panel11.Controls.Add(this.btnThem1);
@@ -656,7 +803,7 @@
             // 
             // btnSua1
             // 
-            this.btnSua1.Location = new System.Drawing.Point(363, 3);
+            this.btnSua1.Location = new System.Drawing.Point(239, 3);
             this.btnSua1.Name = "btnSua1";
             this.btnSua1.Size = new System.Drawing.Size(98, 61);
             this.btnSua1.TabIndex = 3;
@@ -665,7 +812,7 @@
             // 
             // btnXoa1
             // 
-            this.btnXoa1.Location = new System.Drawing.Point(178, 3);
+            this.btnXoa1.Location = new System.Drawing.Point(122, 3);
             this.btnXoa1.Name = "btnXoa1";
             this.btnXoa1.Size = new System.Drawing.Size(98, 61);
             this.btnXoa1.TabIndex = 2;
@@ -718,6 +865,11 @@
             // nmGia
             // 
             this.nmGia.Location = new System.Drawing.Point(109, 13);
+            this.nmGia.Maximum = new decimal(new int[] {
+            1410065408,
+            2,
+            0,
+            0});
             this.nmGia.Name = "nmGia";
             this.nmGia.Size = new System.Drawing.Size(166, 22);
             this.nmGia.TabIndex = 4;
@@ -821,7 +973,13 @@
             // 
             // dgvThucAn
             // 
+            this.dgvThucAn.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvThucAn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvThucAn.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.name,
+            this.idCategory,
+            this.price});
             this.dgvThucAn.Location = new System.Drawing.Point(-1, -1);
             this.dgvThucAn.Name = "dgvThucAn";
             this.dgvThucAn.RowHeadersWidth = 51;
@@ -857,7 +1015,7 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.btnXem);
+            this.panel3.Controls.Add(this.btnLuu);
             this.panel3.Controls.Add(this.btnSua);
             this.panel3.Controls.Add(this.btnXoa);
             this.panel3.Controls.Add(this.btnThem);
@@ -865,6 +1023,15 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(473, 70);
             this.panel3.TabIndex = 0;
+            // 
+            // btnLuu
+            // 
+            this.btnLuu.Location = new System.Drawing.Point(359, 3);
+            this.btnLuu.Name = "btnLuu";
+            this.btnLuu.Size = new System.Drawing.Size(98, 61);
+            this.btnLuu.TabIndex = 4;
+            this.btnLuu.Text = "Lưu";
+            this.btnLuu.UseVisualStyleBackColor = true;
             // 
             // btnSua
             // 
@@ -1023,124 +1190,116 @@
             this.tpTable.Size = new System.Drawing.Size(776, 426);
             this.tpTable.TabIndex = 0;
             // 
-            // btnThisMonth
+            // id
             // 
-            this.btnThisMonth.Location = new System.Drawing.Point(473, 3);
-            this.btnThisMonth.Name = "btnThisMonth";
-            this.btnThisMonth.Size = new System.Drawing.Size(107, 39);
-            this.btnThisMonth.TabIndex = 4;
-            this.btnThisMonth.Text = "Tháng Này";
-            this.btnThisMonth.UseVisualStyleBackColor = true;
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "ID";
+            this.id.MinimumWidth = 6;
+            this.id.Name = "id";
             // 
-            // btnLastMonth
+            // name
             // 
-            this.btnLastMonth.Location = new System.Drawing.Point(628, 3);
-            this.btnLastMonth.Name = "btnLastMonth";
-            this.btnLastMonth.Size = new System.Drawing.Size(107, 39);
-            this.btnLastMonth.TabIndex = 5;
-            this.btnLastMonth.Text = "Tháng trước";
-            this.btnLastMonth.UseVisualStyleBackColor = true;
+            this.name.DataPropertyName = "name";
+            this.name.HeaderText = "Tên Món Ăn";
+            this.name.MinimumWidth = 6;
+            this.name.Name = "name";
             // 
-            // panel29
+            // idCategory
             // 
-            this.panel29.Controls.Add(this.txtAverageBill);
-            this.panel29.Controls.Add(this.txtTotalRevenue);
-            this.panel29.Controls.Add(this.txtTotalBills);
-            this.panel29.Controls.Add(this.lblAverageBill);
-            this.panel29.Controls.Add(this.lblTotalRevenue);
-            this.panel29.Controls.Add(this.lblTotalBills);
-            this.panel29.Controls.Add(this.btnExportExcel);
-            this.panel29.Controls.Add(this.btnViewReport);
-            this.panel29.Location = new System.Drawing.Point(594, 60);
-            this.panel29.Name = "panel29";
-            this.panel29.Size = new System.Drawing.Size(168, 331);
-            this.panel29.TabIndex = 3;
+            this.idCategory.DataPropertyName = "idCategory";
+            this.idCategory.HeaderText = "ID Danh Mục";
+            this.idCategory.MinimumWidth = 6;
+            this.idCategory.Name = "idCategory";
             // 
-            // btnViewReport
+            // price
             // 
-            this.btnViewReport.Location = new System.Drawing.Point(37, 12);
-            this.btnViewReport.Name = "btnViewReport";
-            this.btnViewReport.Size = new System.Drawing.Size(107, 39);
-            this.btnViewReport.TabIndex = 6;
-            this.btnViewReport.Text = "Xem";
-            this.btnViewReport.UseVisualStyleBackColor = true;
+            this.price.DataPropertyName = "price";
+            this.price.HeaderText = "Giá";
+            this.price.MinimumWidth = 6;
+            this.price.Name = "price";
             // 
-            // btnExportExcel
+            // btnLuuAccount
             // 
-            this.btnExportExcel.Location = new System.Drawing.Point(37, 69);
-            this.btnExportExcel.Name = "btnExportExcel";
-            this.btnExportExcel.Size = new System.Drawing.Size(107, 39);
-            this.btnExportExcel.TabIndex = 7;
-            this.btnExportExcel.Text = "Xuất Excel";
-            this.btnExportExcel.UseVisualStyleBackColor = true;
+            this.btnLuuAccount.Location = new System.Drawing.Point(356, 3);
+            this.btnLuuAccount.Name = "btnLuuAccount";
+            this.btnLuuAccount.Size = new System.Drawing.Size(98, 61);
+            this.btnLuuAccount.TabIndex = 4;
+            this.btnLuuAccount.Text = "Lưu";
+            this.btnLuuAccount.UseVisualStyleBackColor = true;
             // 
-            // lblTotalBills
+            // btnLuu1
             // 
-            this.lblTotalBills.AutoSize = true;
-            this.lblTotalBills.Location = new System.Drawing.Point(32, 125);
-            this.lblTotalBills.Name = "lblTotalBills";
-            this.lblTotalBills.Size = new System.Drawing.Size(112, 16);
-            this.lblTotalBills.TabIndex = 8;
-            this.lblTotalBills.Text = "Tổng số hóa đơn:";
+            this.btnLuu1.Location = new System.Drawing.Point(357, 3);
+            this.btnLuu1.Name = "btnLuu1";
+            this.btnLuu1.Size = new System.Drawing.Size(98, 61);
+            this.btnLuu1.TabIndex = 5;
+            this.btnLuu1.Text = "Lưu";
+            this.btnLuu1.UseVisualStyleBackColor = true;
             // 
-            // lblTotalRevenue
+            // btnLuu2
             // 
-            this.lblTotalRevenue.AutoSize = true;
-            this.lblTotalRevenue.Location = new System.Drawing.Point(34, 193);
-            this.lblTotalRevenue.Name = "lblTotalRevenue";
-            this.lblTotalRevenue.Size = new System.Drawing.Size(103, 16);
-            this.lblTotalRevenue.TabIndex = 9;
-            this.lblTotalRevenue.Text = "Tổng doanh thu:";
+            this.btnLuu2.Location = new System.Drawing.Point(362, 3);
+            this.btnLuu2.Name = "btnLuu2";
+            this.btnLuu2.Size = new System.Drawing.Size(98, 61);
+            this.btnLuu2.TabIndex = 5;
+            this.btnLuu2.Text = "Lưu";
+            this.btnLuu2.UseVisualStyleBackColor = true;
             // 
-            // lblAverageBill
+            // UserName
             // 
-            this.lblAverageBill.AutoSize = true;
-            this.lblAverageBill.Location = new System.Drawing.Point(34, 261);
-            this.lblAverageBill.Name = "lblAverageBill";
-            this.lblAverageBill.Size = new System.Drawing.Size(73, 16);
-            this.lblAverageBill.TabIndex = 10;
-            this.lblAverageBill.Text = "Trung bình:";
+            this.UserName.DataPropertyName = "UserName";
+            this.UserName.HeaderText = "Tên Đăng Nhập";
+            this.UserName.MinimumWidth = 6;
+            this.UserName.Name = "UserName";
             // 
-            // txtTotalBills
+            // DisplayName
             // 
-            this.txtTotalBills.Location = new System.Drawing.Point(37, 155);
-            this.txtTotalBills.Name = "txtTotalBills";
-            this.txtTotalBills.Size = new System.Drawing.Size(100, 22);
-            this.txtTotalBills.TabIndex = 11;
+            this.DisplayName.DataPropertyName = "DisplayName";
+            this.DisplayName.HeaderText = "Tên Hiển Thị";
+            this.DisplayName.MinimumWidth = 6;
+            this.DisplayName.Name = "DisplayName";
             // 
-            // txtTotalRevenue
+            // Type
             // 
-            this.txtTotalRevenue.Location = new System.Drawing.Point(37, 223);
-            this.txtTotalRevenue.Name = "txtTotalRevenue";
-            this.txtTotalRevenue.Size = new System.Drawing.Size(100, 22);
-            this.txtTotalRevenue.TabIndex = 12;
+            this.Type.DataPropertyName = "Type";
+            this.Type.HeaderText = "Loại";
+            this.Type.MinimumWidth = 6;
+            this.Type.Name = "Type";
             // 
-            // txtAverageBill
+            // idBan
             // 
-            this.txtAverageBill.Location = new System.Drawing.Point(37, 292);
-            this.txtAverageBill.Name = "txtAverageBill";
-            this.txtAverageBill.Size = new System.Drawing.Size(100, 22);
-            this.txtAverageBill.TabIndex = 13;
+            this.idBan.DataPropertyName = "id";
+            this.idBan.HeaderText = "ID Bàn";
+            this.idBan.MinimumWidth = 6;
+            this.idBan.Name = "idBan";
             // 
-            // dtgvReport
+            // nameBan
             // 
-            this.dtgvReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgvReport.Location = new System.Drawing.Point(6, 60);
-            this.dtgvReport.Name = "dtgvReport";
-            this.dtgvReport.RowHeadersWidth = 51;
-            this.dtgvReport.RowTemplate.Height = 24;
-            this.dtgvReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtgvReport.Size = new System.Drawing.Size(577, 331);
-            this.dtgvReport.TabIndex = 14;
+            this.nameBan.DataPropertyName = "name";
+            this.nameBan.HeaderText = "Tên Bàn";
+            this.nameBan.MinimumWidth = 6;
+            this.nameBan.Name = "nameBan";
             // 
-            // btnXem
+            // status
             // 
-            this.btnXem.Location = new System.Drawing.Point(359, 3);
-            this.btnXem.Name = "btnXem";
-            this.btnXem.Size = new System.Drawing.Size(98, 61);
-            this.btnXem.TabIndex = 4;
-            this.btnXem.Text = "Xem";
-            this.btnXem.UseVisualStyleBackColor = true;
+            this.status.DataPropertyName = "status";
+            this.status.HeaderText = "Trạng Thái";
+            this.status.MinimumWidth = 6;
+            this.status.Name = "status";
+            // 
+            // idDanhMuc
+            // 
+            this.idDanhMuc.DataPropertyName = "id";
+            this.idDanhMuc.HeaderText = "ID Danh Mục";
+            this.idDanhMuc.MinimumWidth = 6;
+            this.idDanhMuc.Name = "idDanhMuc";
+            // 
+            // tenDoanhMuc
+            // 
+            this.tenDoanhMuc.DataPropertyName = "name";
+            this.tenDoanhMuc.HeaderText = "Tên Danh Mục";
+            this.tenDoanhMuc.MinimumWidth = 6;
+            this.tenDoanhMuc.Name = "tenDoanhMuc";
             // 
             // fAdmin
             // 
@@ -1151,6 +1310,9 @@
             this.Name = "fAdmin";
             this.Text = "fAdmin";
             this.tpReport.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dtgvReport)).EndInit();
+            this.panel29.ResumeLayout(false);
+            this.panel29.PerformLayout();
             this.panel28.ResumeLayout(false);
             this.tpAccount.ResumeLayout(false);
             this.panel24.ResumeLayout(false);
@@ -1173,7 +1335,7 @@
             this.panel20.ResumeLayout(false);
             this.panel20.PerformLayout();
             this.panel15.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBan)).EndInit();
             this.panel14.ResumeLayout(false);
             this.tpCategory.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
@@ -1206,9 +1368,6 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).EndInit();
             this.tpTable.ResumeLayout(false);
-            this.panel29.ResumeLayout(false);
-            this.panel29.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgvReport)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1246,7 +1405,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtIDTable;
         private System.Windows.Forms.Panel panel15;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvBan;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.Button btnSua2;
         private System.Windows.Forms.Button btnXoa2;
@@ -1258,7 +1417,7 @@
         private System.Windows.Forms.TextBox txtTenDoanhMuc;
         private System.Windows.Forms.Panel panel17;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtMaDoanhMuc;
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.DataGridView dgvDoanhMuc;
         private System.Windows.Forms.Panel panel11;
@@ -1317,6 +1476,21 @@
         private System.Windows.Forms.TextBox txtTotalRevenue;
         private System.Windows.Forms.TextBox txtTotalBills;
         private System.Windows.Forms.DataGridView dtgvReport;
-        private System.Windows.Forms.Button btnXem;
+        private System.Windows.Forms.Button btnLuu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idCategory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn price;
+        private System.Windows.Forms.Button btnLuuAccount;
+        private System.Windows.Forms.Button btnLuu2;
+        private System.Windows.Forms.Button btnLuu1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DisplayName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idBan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameBan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDanhMuc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tenDoanhMuc;
     }
 }
