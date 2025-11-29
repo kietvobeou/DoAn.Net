@@ -19,6 +19,38 @@ namespace DoAn.Net
             daTaiKhoan = new TaiKhoanTableAdapter();
         }
 
+        public bool UpdateAccount(string userName, string displayName, string passWord, string newPass)
+        {
+            try
+            {
+                var data = daTaiKhoan.GetData();
+                var account = data.FirstOrDefault(acc =>
+                    acc.UserName == userName && acc.PassWord == passWord);
+                if (account != null)
+                {
+                    account.DisplayName = displayName;
+                    account.PassWord = newPass;
+                    daTaiKhoan.Update(account);
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public TaiKhoan GetAccountByUserName(string userName)
+        {
+            var data = daTaiKhoan.GetData();
+            var row = data.FirstOrDefault(acc => acc.UserName == userName);
+
+            if (row == null) return null;
+
+            return new TaiKhoan(row);
+        }
+
         public bool Login(string userName, string passWord)
         {
             try
