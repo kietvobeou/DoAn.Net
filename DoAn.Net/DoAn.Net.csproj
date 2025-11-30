@@ -92,6 +92,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QuanLyQuanCafe.xsd</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="fAccountProfile.resx">
+      <DependentUpon>fAccountProfile.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="fAdmin.resx">
       <DependentUpon>fAdmin.cs</DependentUpon>
     </EmbeddedResource>
