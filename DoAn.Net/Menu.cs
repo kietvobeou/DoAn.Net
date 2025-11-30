@@ -19,10 +19,10 @@ namespace DoAn.Net
 
         public Menu(DataRow row)
         {
-            this.FoodName = row["Name"].ToString();
-            this.Count = (int)row["count"];
-            this.Price = (float)Convert.ToDouble(row["price"].ToString());
-            this.TotalPrice = (float)Convert.ToDouble(row["totalPrice"].ToString());
+            this.FoodName = row["FoodName"].ToString();
+            this.Count = (int)row["Count"];
+            this.Price = (float)Convert.ToDouble(row["Price"].ToString());
+            this.TotalPrice = (float)Convert.ToDouble(row["TotalPrice"].ToString());
         }
 
         public Menu() { }

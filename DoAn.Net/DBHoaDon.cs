@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,42 @@ namespace DoAn.Net
         public DBHoaDon()
         {
             daBill = new HoaDonTableAdapter();
+        }
+
+        // --- Lấy danh sách món ăn theo bàn ---
+        public List<Menu> GetListMenuByTable(int idTable)
+        {
+            List<Menu> listMenu = new List<Menu>();
+
+            // Lấy chuỗi kết nối từ Project Settings
+            string connectionString = Properties.Settings.Default.QuanLyQuanCafeConnectionString;
+
+            // Câu lệnh SQL gọi Stored Procedure: USP_GetListMenuByTable
+            // Query này nối 3 bảng: ChiTietHoaDon, HoaDon, MonAn
+            string query = "EXEC USP_GetListMenuByTable @idTable";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@idTable", idTable);
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable data = new DataTable();
+                    adapter.Fill(data);
+
+                    foreach (DataRow item in data.Rows)
+                    {
+                        Menu menu = new Menu(item);
+                        listMenu.Add(menu);
+                    }
+                }
+            }
+            catch { }
+
+            return listMenu;
         }
 
         public DataTable GetBillListByDate(DateTime checkIn, DateTime checkOut)
