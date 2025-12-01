@@ -93,9 +93,7 @@ namespace DoAn.Net
 
                 if (account != null)
                 {
-                    account.DisplayName = displayName;
-                    account.Type = type;
-                    daTaiKhoan.Update(account);
+                    daTaiKhoan.UpdateQuery(account.DisplayName,account.Type,account.UserName);
                     return true;
                 }
                 return false;
@@ -136,7 +134,7 @@ namespace DoAn.Net
 
                 if (account != null)
                 {
-                    account.PassWord = "0";
+                    account.PassWord = "123456";
                     daTaiKhoan.Update(account);
                     return true;
                 }

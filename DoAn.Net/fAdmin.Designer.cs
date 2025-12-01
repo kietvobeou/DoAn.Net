@@ -60,6 +60,7 @@
             this.panel23 = new System.Windows.Forms.Panel();
             this.dgvAccount = new System.Windows.Forms.DataGridView();
             this.panel22 = new System.Windows.Forms.Panel();
+            this.btnLuuAccount = new System.Windows.Forms.Button();
             this.btnSua3 = new System.Windows.Forms.Button();
             this.btnXoa3 = new System.Windows.Forms.Button();
             this.btnThem3 = new System.Windows.Forms.Button();
@@ -76,7 +77,11 @@
             this.txtIDTable = new System.Windows.Forms.TextBox();
             this.panel15 = new System.Windows.Forms.Panel();
             this.dgvBan = new System.Windows.Forms.DataGridView();
+            this.idBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel14 = new System.Windows.Forms.Panel();
+            this.btnLuu2 = new System.Windows.Forms.Button();
             this.btnSua2 = new System.Windows.Forms.Button();
             this.btnXoa2 = new System.Windows.Forms.Button();
             this.btnThem2 = new System.Windows.Forms.Button();
@@ -90,7 +95,10 @@
             this.txtMaDoanhMuc = new System.Windows.Forms.TextBox();
             this.panel12 = new System.Windows.Forms.Panel();
             this.dgvDoanhMuc = new System.Windows.Forms.DataGridView();
+            this.idDanhMuc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tenDoanhMuc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.btnLuu1 = new System.Windows.Forms.Button();
             this.btnSua1 = new System.Windows.Forms.Button();
             this.btnXoa1 = new System.Windows.Forms.Button();
             this.btnThem1 = new System.Windows.Forms.Button();
@@ -110,6 +118,10 @@
             this.txtID = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.dgvThucAn = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnTim = new System.Windows.Forms.Button();
             this.txtSearchFood = new System.Windows.Forms.TextBox();
@@ -131,21 +143,25 @@
             this.txbPageBill = new System.Windows.Forms.TextBox();
             this.dgvBill = new System.Windows.Forms.DataGridView();
             this.tpTable = new System.Windows.Forms.TabControl();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnLuuAccount = new System.Windows.Forms.Button();
-            this.btnLuu1 = new System.Windows.Forms.Button();
-            this.btnLuu2 = new System.Windows.Forms.Button();
+            this.idHoaDon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateCheckIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateCheckOut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idTable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TrangThaiHoaDon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idBill = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tenBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GioVao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GioRa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TongTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GiamGia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.finalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TrangThaiBill = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idDanhMuc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tenDoanhMuc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PassWord = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tpReport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvReport)).BeginInit();
             this.panel29.SuspendLayout();
@@ -208,7 +224,16 @@
             // dtgvReport
             // 
             this.dtgvReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgvReport.Location = new System.Drawing.Point(6, 60);
+            this.dtgvReport.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idBill,
+            this.tenBan,
+            this.GioVao,
+            this.GioRa,
+            this.TongTien,
+            this.GiamGia,
+            this.finalPrice,
+            this.TrangThaiBill});
+            this.dtgvReport.Location = new System.Drawing.Point(11, 63);
             this.dtgvReport.Name = "dtgvReport";
             this.dtgvReport.RowHeadersWidth = 51;
             this.dtgvReport.RowTemplate.Height = 24;
@@ -483,7 +508,8 @@
             this.dgvAccount.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.UserName,
             this.DisplayName,
-            this.Type});
+            this.Type,
+            this.PassWord});
             this.dgvAccount.Location = new System.Drawing.Point(0, -3);
             this.dgvAccount.Name = "dgvAccount";
             this.dgvAccount.RowHeadersWidth = 51;
@@ -502,6 +528,15 @@
             this.panel22.Name = "panel22";
             this.panel22.Size = new System.Drawing.Size(473, 70);
             this.panel22.TabIndex = 3;
+            // 
+            // btnLuuAccount
+            // 
+            this.btnLuuAccount.Location = new System.Drawing.Point(356, 3);
+            this.btnLuuAccount.Name = "btnLuuAccount";
+            this.btnLuuAccount.Size = new System.Drawing.Size(98, 61);
+            this.btnLuuAccount.TabIndex = 4;
+            this.btnLuuAccount.Text = "Lưu";
+            this.btnLuuAccount.UseVisualStyleBackColor = true;
             // 
             // btnSua3
             // 
@@ -655,6 +690,27 @@
             this.dgvBan.Size = new System.Drawing.Size(473, 306);
             this.dgvBan.TabIndex = 0;
             // 
+            // idBan
+            // 
+            this.idBan.DataPropertyName = "id";
+            this.idBan.HeaderText = "ID Bàn";
+            this.idBan.MinimumWidth = 6;
+            this.idBan.Name = "idBan";
+            // 
+            // nameBan
+            // 
+            this.nameBan.DataPropertyName = "name";
+            this.nameBan.HeaderText = "Tên Bàn";
+            this.nameBan.MinimumWidth = 6;
+            this.nameBan.Name = "nameBan";
+            // 
+            // status
+            // 
+            this.status.DataPropertyName = "status";
+            this.status.HeaderText = "Trạng Thái";
+            this.status.MinimumWidth = 6;
+            this.status.Name = "status";
+            // 
             // panel14
             // 
             this.panel14.Controls.Add(this.btnLuu2);
@@ -665,6 +721,15 @@
             this.panel14.Name = "panel14";
             this.panel14.Size = new System.Drawing.Size(473, 70);
             this.panel14.TabIndex = 2;
+            // 
+            // btnLuu2
+            // 
+            this.btnLuu2.Location = new System.Drawing.Point(362, 3);
+            this.btnLuu2.Name = "btnLuu2";
+            this.btnLuu2.Size = new System.Drawing.Size(98, 61);
+            this.btnLuu2.TabIndex = 5;
+            this.btnLuu2.Text = "Lưu";
+            this.btnLuu2.UseVisualStyleBackColor = true;
             // 
             // btnSua2
             // 
@@ -790,6 +855,20 @@
             this.dgvDoanhMuc.Size = new System.Drawing.Size(464, 309);
             this.dgvDoanhMuc.TabIndex = 0;
             // 
+            // idDanhMuc
+            // 
+            this.idDanhMuc.DataPropertyName = "id";
+            this.idDanhMuc.HeaderText = "ID Danh Mục";
+            this.idDanhMuc.MinimumWidth = 6;
+            this.idDanhMuc.Name = "idDanhMuc";
+            // 
+            // tenDoanhMuc
+            // 
+            this.tenDoanhMuc.DataPropertyName = "name";
+            this.tenDoanhMuc.HeaderText = "Tên Danh Mục";
+            this.tenDoanhMuc.MinimumWidth = 6;
+            this.tenDoanhMuc.Name = "tenDoanhMuc";
+            // 
             // panel11
             // 
             this.panel11.Controls.Add(this.btnLuu1);
@@ -800,6 +879,15 @@
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(473, 70);
             this.panel11.TabIndex = 1;
+            // 
+            // btnLuu1
+            // 
+            this.btnLuu1.Location = new System.Drawing.Point(357, 3);
+            this.btnLuu1.Name = "btnLuu1";
+            this.btnLuu1.Size = new System.Drawing.Size(98, 61);
+            this.btnLuu1.TabIndex = 5;
+            this.btnLuu1.Text = "Lưu";
+            this.btnLuu1.UseVisualStyleBackColor = true;
             // 
             // btnSua1
             // 
@@ -988,6 +1076,34 @@
             this.dgvThucAn.Size = new System.Drawing.Size(473, 313);
             this.dgvThucAn.TabIndex = 0;
             // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "ID";
+            this.id.MinimumWidth = 6;
+            this.id.Name = "id";
+            // 
+            // name
+            // 
+            this.name.DataPropertyName = "name";
+            this.name.HeaderText = "Tên Món Ăn";
+            this.name.MinimumWidth = 6;
+            this.name.Name = "name";
+            // 
+            // idCategory
+            // 
+            this.idCategory.DataPropertyName = "idCategory";
+            this.idCategory.HeaderText = "ID Danh Mục";
+            this.idCategory.MinimumWidth = 6;
+            this.idCategory.Name = "idCategory";
+            // 
+            // price
+            // 
+            this.price.DataPropertyName = "price";
+            this.price.HeaderText = "Giá";
+            this.price.MinimumWidth = 6;
+            this.price.Name = "price";
+            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.btnTim);
@@ -1167,7 +1283,16 @@
             // 
             // dgvBill
             // 
+            this.dgvBill.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBill.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idHoaDon,
+            this.DateCheckIn,
+            this.DateCheckOut,
+            this.idTable,
+            this.TrangThaiHoaDon,
+            this.discount,
+            this.totalPrice});
             this.dgvBill.Location = new System.Drawing.Point(3, 3);
             this.dgvBill.Name = "dgvBill";
             this.dgvBill.RowHeadersWidth = 51;
@@ -1190,60 +1315,118 @@
             this.tpTable.Size = new System.Drawing.Size(776, 426);
             this.tpTable.TabIndex = 0;
             // 
-            // id
+            // idHoaDon
             // 
-            this.id.DataPropertyName = "id";
-            this.id.HeaderText = "ID";
-            this.id.MinimumWidth = 6;
-            this.id.Name = "id";
+            this.idHoaDon.DataPropertyName = "id";
+            this.idHoaDon.HeaderText = "Mã Hóa Đơn";
+            this.idHoaDon.MinimumWidth = 6;
+            this.idHoaDon.Name = "idHoaDon";
             // 
-            // name
+            // DateCheckIn
             // 
-            this.name.DataPropertyName = "name";
-            this.name.HeaderText = "Tên Món Ăn";
-            this.name.MinimumWidth = 6;
-            this.name.Name = "name";
+            this.DateCheckIn.DataPropertyName = "DateCheckIn";
+            this.DateCheckIn.HeaderText = "Giờ Vào";
+            this.DateCheckIn.MinimumWidth = 6;
+            this.DateCheckIn.Name = "DateCheckIn";
             // 
-            // idCategory
+            // DateCheckOut
             // 
-            this.idCategory.DataPropertyName = "idCategory";
-            this.idCategory.HeaderText = "ID Danh Mục";
-            this.idCategory.MinimumWidth = 6;
-            this.idCategory.Name = "idCategory";
+            this.DateCheckOut.DataPropertyName = "DateCheckOut";
+            this.DateCheckOut.HeaderText = "Giờ Ra";
+            this.DateCheckOut.MinimumWidth = 6;
+            this.DateCheckOut.Name = "DateCheckOut";
             // 
-            // price
+            // idTable
             // 
-            this.price.DataPropertyName = "price";
-            this.price.HeaderText = "Giá";
-            this.price.MinimumWidth = 6;
-            this.price.Name = "price";
+            this.idTable.DataPropertyName = "idTable";
+            this.idTable.HeaderText = "Mã Bàn";
+            this.idTable.MinimumWidth = 6;
+            this.idTable.Name = "idTable";
             // 
-            // btnLuuAccount
+            // TrangThaiHoaDon
             // 
-            this.btnLuuAccount.Location = new System.Drawing.Point(356, 3);
-            this.btnLuuAccount.Name = "btnLuuAccount";
-            this.btnLuuAccount.Size = new System.Drawing.Size(98, 61);
-            this.btnLuuAccount.TabIndex = 4;
-            this.btnLuuAccount.Text = "Lưu";
-            this.btnLuuAccount.UseVisualStyleBackColor = true;
+            this.TrangThaiHoaDon.DataPropertyName = "status";
+            this.TrangThaiHoaDon.HeaderText = "Trạng Thái";
+            this.TrangThaiHoaDon.MinimumWidth = 6;
+            this.TrangThaiHoaDon.Name = "TrangThaiHoaDon";
             // 
-            // btnLuu1
+            // discount
             // 
-            this.btnLuu1.Location = new System.Drawing.Point(357, 3);
-            this.btnLuu1.Name = "btnLuu1";
-            this.btnLuu1.Size = new System.Drawing.Size(98, 61);
-            this.btnLuu1.TabIndex = 5;
-            this.btnLuu1.Text = "Lưu";
-            this.btnLuu1.UseVisualStyleBackColor = true;
+            this.discount.DataPropertyName = "discount";
+            this.discount.HeaderText = "Giảm Giá";
+            this.discount.MinimumWidth = 6;
+            this.discount.Name = "discount";
             // 
-            // btnLuu2
+            // totalPrice
             // 
-            this.btnLuu2.Location = new System.Drawing.Point(362, 3);
-            this.btnLuu2.Name = "btnLuu2";
-            this.btnLuu2.Size = new System.Drawing.Size(98, 61);
-            this.btnLuu2.TabIndex = 5;
-            this.btnLuu2.Text = "Lưu";
-            this.btnLuu2.UseVisualStyleBackColor = true;
+            this.totalPrice.DataPropertyName = "totalPrice";
+            this.totalPrice.HeaderText = "Tổng Tiền";
+            this.totalPrice.MinimumWidth = 6;
+            this.totalPrice.Name = "totalPrice";
+            // 
+            // idBill
+            // 
+            this.idBill.DataPropertyName = "BillID";
+            this.idBill.HeaderText = "Mã Hóa Đơn";
+            this.idBill.MinimumWidth = 6;
+            this.idBill.Name = "idBill";
+            this.idBill.Width = 125;
+            // 
+            // tenBan
+            // 
+            this.tenBan.DataPropertyName = "tableName";
+            this.tenBan.HeaderText = "Tên Bàn";
+            this.tenBan.MinimumWidth = 6;
+            this.tenBan.Name = "tenBan";
+            this.tenBan.Width = 125;
+            // 
+            // GioVao
+            // 
+            this.GioVao.DataPropertyName = "CheckInDate";
+            this.GioVao.HeaderText = "Giờ Vào";
+            this.GioVao.MinimumWidth = 6;
+            this.GioVao.Name = "GioVao";
+            this.GioVao.Width = 125;
+            // 
+            // GioRa
+            // 
+            this.GioRa.DataPropertyName = "CheckOutDate";
+            this.GioRa.HeaderText = "Giờ Ra";
+            this.GioRa.MinimumWidth = 6;
+            this.GioRa.Name = "GioRa";
+            this.GioRa.Width = 125;
+            // 
+            // TongTien
+            // 
+            this.TongTien.DataPropertyName = "totalPrice";
+            this.TongTien.HeaderText = "Tổng tiền";
+            this.TongTien.MinimumWidth = 6;
+            this.TongTien.Name = "TongTien";
+            this.TongTien.Width = 125;
+            // 
+            // GiamGia
+            // 
+            this.GiamGia.DataPropertyName = "Discount";
+            this.GiamGia.HeaderText = "Giảm Giá";
+            this.GiamGia.MinimumWidth = 6;
+            this.GiamGia.Name = "GiamGia";
+            this.GiamGia.Width = 125;
+            // 
+            // finalPrice
+            // 
+            this.finalPrice.DataPropertyName = "finalPrice";
+            this.finalPrice.HeaderText = "Thành Tiền";
+            this.finalPrice.MinimumWidth = 6;
+            this.finalPrice.Name = "finalPrice";
+            this.finalPrice.Width = 125;
+            // 
+            // TrangThaiBill
+            // 
+            this.TrangThaiBill.DataPropertyName = "statusText";
+            this.TrangThaiBill.HeaderText = "Trạng Thái";
+            this.TrangThaiBill.MinimumWidth = 6;
+            this.TrangThaiBill.Name = "TrangThaiBill";
+            this.TrangThaiBill.Width = 125;
             // 
             // UserName
             // 
@@ -1266,40 +1449,12 @@
             this.Type.MinimumWidth = 6;
             this.Type.Name = "Type";
             // 
-            // idBan
+            // PassWord
             // 
-            this.idBan.DataPropertyName = "id";
-            this.idBan.HeaderText = "ID Bàn";
-            this.idBan.MinimumWidth = 6;
-            this.idBan.Name = "idBan";
-            // 
-            // nameBan
-            // 
-            this.nameBan.DataPropertyName = "name";
-            this.nameBan.HeaderText = "Tên Bàn";
-            this.nameBan.MinimumWidth = 6;
-            this.nameBan.Name = "nameBan";
-            // 
-            // status
-            // 
-            this.status.DataPropertyName = "status";
-            this.status.HeaderText = "Trạng Thái";
-            this.status.MinimumWidth = 6;
-            this.status.Name = "status";
-            // 
-            // idDanhMuc
-            // 
-            this.idDanhMuc.DataPropertyName = "id";
-            this.idDanhMuc.HeaderText = "ID Danh Mục";
-            this.idDanhMuc.MinimumWidth = 6;
-            this.idDanhMuc.Name = "idDanhMuc";
-            // 
-            // tenDoanhMuc
-            // 
-            this.tenDoanhMuc.DataPropertyName = "name";
-            this.tenDoanhMuc.HeaderText = "Tên Danh Mục";
-            this.tenDoanhMuc.MinimumWidth = 6;
-            this.tenDoanhMuc.Name = "tenDoanhMuc";
+            this.PassWord.DataPropertyName = "PassWord";
+            this.PassWord.HeaderText = "Mật Khẩu";
+            this.PassWord.MinimumWidth = 6;
+            this.PassWord.Name = "PassWord";
             // 
             // fAdmin
             // 
@@ -1484,13 +1639,29 @@
         private System.Windows.Forms.Button btnLuuAccount;
         private System.Windows.Forms.Button btnLuu2;
         private System.Windows.Forms.Button btnLuu1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DisplayName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn idBan;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameBan;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDanhMuc;
         private System.Windows.Forms.DataGridViewTextBoxColumn tenDoanhMuc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idHoaDon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DateCheckIn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DateCheckOut;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idTable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TrangThaiHoaDon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn discount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn totalPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idBill;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tenBan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GioVao;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GioRa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TongTien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GiamGia;
+        private System.Windows.Forms.DataGridViewTextBoxColumn finalPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TrangThaiBill;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DisplayName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PassWord;
     }
 }

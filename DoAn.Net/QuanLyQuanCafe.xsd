@@ -58,7 +58,7 @@ SELECT id, name, status FROM Ban WHERE (id = @id)</CommandText>
               <Mapping SourceColumn="status" DataSetColumn="status" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteTable" Modifier="Public" Name="DeleteTable" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="DeleteTable">
+              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteTable" Modifier="Public" Name="DeleteTable" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteTable">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM [dbo].[Ban] WHERE ([id] = @Original_id) </CommandText>
@@ -88,7 +88,7 @@ SELECT id, name, status FROM Ban WHERE (id = @id)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectName="QuanLyQuanCafe.dbo.USP_SwitchTable" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="SwitchTable" Modifier="Public" Name="SwitchTable" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="SwitchTable">
+              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectName="QuanLyQuanCafe.dbo.USP_SwitchTable" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="SwitchTable" Modifier="Public" Name="SwitchTable" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="SwitchTable">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.USP_SwitchTable</CommandText>
@@ -100,7 +100,7 @@ SELECT id, name, status FROM Ban WHERE (id = @id)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateTable" Modifier="Public" Name="UpdateTable" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="UpdateTable">
+              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateTable" Modifier="Public" Name="UpdateTable" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="UpdateTable">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE [dbo].[Ban] SET [name] = @name, [status] = @status WHERE ([id] = @Original_id) </CommandText>
@@ -112,7 +112,7 @@ SELECT id, name, status FROM Ban WHERE (id = @id)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateTableStatus" Modifier="Public" Name="UpdateTableStatus" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="UpdateTableStatus">
+              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateTableStatus" Modifier="Public" Name="UpdateTableStatus" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="UpdateTableStatus">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText> UPDATE Ban SET status = @status WHERE id = @id</CommandText>
@@ -193,6 +193,20 @@ SELECT UserName, DisplayName, PassWord, Type FROM TaiKhoan WHERE (UserName = @Us
                     </Parameters>
                   </DbCommand>
                 </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuery" Modifier="Public" Name="UpdateQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="UpdateQuery">
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE TaiKhoan
+SET DisplayName = @DisplayName, Type = @Type
+WHERE UserName = @UserName</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="DisplayName" ColumnName="DisplayName" DataSourceName="QuanLyQuanCafe.dbo.TaiKhoan" DataTypeServer="nvarchar(100)" DbType="String" Direction="Input" ParameterName="@DisplayName" Precision="0" ProviderType="NVarChar" Scale="0" Size="100" SourceColumn="DisplayName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Type" ColumnName="Type" DataSourceName="QuanLyQuanCafe.dbo.TaiKhoan" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Type" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="Type" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="UserName" ColumnName="UserName" DataSourceName="QuanLyQuanCafe.dbo.TaiKhoan" DataTypeServer="nvarchar(100)" DbType="String" Direction="Input" ParameterName="@UserName" Precision="0" ProviderType="NVarChar" Scale="0" Size="100" SourceColumn="UserName" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
               </DbSource>
             </Sources>
           </TableAdapter>
@@ -596,7 +610,7 @@ SELECT id, name, idCategory, price FROM MonAn WHERE (id = @id)</CommandText>
               <Mapping SourceColumn="price" DataSetColumn="price" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="CountFoodByCategory" Modifier="Public" Name="CountFoodByCategory" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="CountFoodByCategory">
+              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="CountFoodByCategory" Modifier="Public" Name="CountFoodByCategory" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="CountFoodByCategory">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT COUNT(*) 
@@ -608,7 +622,7 @@ WHERE idCategory = @categoryID</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="Delete1" Modifier="Public" Name="Delete1" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="Delete1">
+              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="Delete1" Modifier="Public" Name="Delete1" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="Delete1">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText> DELETE FROM MonAn WHERE id = @id</CommandText>
@@ -618,7 +632,7 @@ WHERE idCategory = @categoryID</CommandText>
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectName="QuanLyQuanCafe.dbo.MonAn" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy1" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetDataBy1" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillBy">
+              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectName="QuanLyQuanCafe.dbo.MonAn" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy11" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetDataBy11" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy11" UserSourceName="FillBy">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>  SELECT * FROM MonAn WHERE dbo.fuConvertToUnsign1(name) LIKE N'%' + dbo.fuConvertToUnsign1(@name) + '%'</CommandText>
@@ -800,23 +814,23 @@ WHERE idCategory = @categoryID</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Report" msprop:Generator_RowClassName="ReportRow" msprop:Generator_RowEvHandlerName="ReportRowChangeEventHandler" msprop:Generator_RowDeletedName="ReportRowDeleted" msprop:Generator_RowDeletingName="ReportRowDeleting" msprop:Generator_RowEvArgName="ReportRowChangeEvent" msprop:Generator_TablePropName="Report" msprop:Generator_RowChangedName="ReportRowChanged" msprop:Generator_UserTableName="Report" msprop:Generator_RowChangingName="ReportRowChanging" msprop:Generator_TableClassName="ReportDataTable" msprop:Generator_TableVarName="tableReport">
+        <xs:element name="Report" msprop:Generator_RowEvHandlerName="ReportRowChangeEventHandler" msprop:Generator_RowDeletedName="ReportRowDeleted" msprop:Generator_RowDeletingName="ReportRowDeleting" msprop:Generator_RowEvArgName="ReportRowChangeEvent" msprop:Generator_TablePropName="Report" msprop:Generator_RowChangedName="ReportRowChanged" msprop:Generator_UserTableName="Report" msprop:Generator_RowChangingName="ReportRowChanging" msprop:Generator_RowClassName="ReportRow" msprop:Generator_TableClassName="ReportDataTable" msprop:Generator_TableVarName="tableReport">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="BillID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="BillID" msprop:Generator_ColumnPropNameInTable="BillIDColumn" msprop:Generator_ColumnPropNameInRow="BillID" msprop:Generator_ColumnVarNameInTable="columnBillID" type="xs:int" />
-              <xs:element name="TableName" msprop:Generator_UserColumnName="TableName" msprop:Generator_ColumnPropNameInTable="TableNameColumn" msprop:Generator_ColumnPropNameInRow="TableName" msprop:Generator_ColumnVarNameInTable="columnTableName">
+              <xs:element name="BillID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="BillIDColumn" msprop:Generator_ColumnPropNameInRow="BillID" msprop:Generator_UserColumnName="BillID" msprop:Generator_ColumnVarNameInTable="columnBillID" type="xs:int" />
+              <xs:element name="TableName" msprop:Generator_ColumnPropNameInTable="TableNameColumn" msprop:Generator_ColumnPropNameInRow="TableName" msprop:Generator_UserColumnName="TableName" msprop:Generator_ColumnVarNameInTable="columnTableName">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="100" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="CheckInDate" msprop:Generator_UserColumnName="CheckInDate" msprop:Generator_ColumnPropNameInTable="CheckInDateColumn" msprop:Generator_ColumnPropNameInRow="CheckInDate" msprop:Generator_ColumnVarNameInTable="columnCheckInDate" type="xs:dateTime" />
-              <xs:element name="CheckOutDate" msprop:Generator_UserColumnName="CheckOutDate" msprop:Generator_ColumnPropNameInTable="CheckOutDateColumn" msprop:Generator_ColumnPropNameInRow="CheckOutDate" msprop:Generator_ColumnVarNameInTable="columnCheckOutDate" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="TotalPrice" msprop:Generator_UserColumnName="TotalPrice" msprop:Generator_ColumnPropNameInTable="TotalPriceColumn" msprop:Generator_ColumnPropNameInRow="TotalPrice" msprop:Generator_ColumnVarNameInTable="columnTotalPrice" type="xs:double" minOccurs="0" />
-              <xs:element name="Discount" msprop:Generator_UserColumnName="Discount" msprop:Generator_ColumnPropNameInTable="DiscountColumn" msprop:Generator_ColumnPropNameInRow="Discount" msprop:Generator_ColumnVarNameInTable="columnDiscount" type="xs:int" minOccurs="0" />
-              <xs:element name="FinalPrice" msdata:ReadOnly="true" msprop:Generator_UserColumnName="FinalPrice" msprop:Generator_ColumnPropNameInTable="FinalPriceColumn" msprop:Generator_ColumnPropNameInRow="FinalPrice" msprop:Generator_ColumnVarNameInTable="columnFinalPrice" type="xs:double" minOccurs="0" />
-              <xs:element name="StatusText" msdata:ReadOnly="true" msprop:Generator_UserColumnName="StatusText" msprop:Generator_ColumnPropNameInTable="StatusTextColumn" msprop:Generator_ColumnPropNameInRow="StatusText" msprop:Generator_ColumnVarNameInTable="columnStatusText" minOccurs="0">
+              <xs:element name="CheckInDate" msprop:Generator_ColumnPropNameInTable="CheckInDateColumn" msprop:Generator_ColumnPropNameInRow="CheckInDate" msprop:Generator_UserColumnName="CheckInDate" msprop:Generator_ColumnVarNameInTable="columnCheckInDate" type="xs:dateTime" />
+              <xs:element name="CheckOutDate" msprop:Generator_ColumnPropNameInTable="CheckOutDateColumn" msprop:Generator_ColumnPropNameInRow="CheckOutDate" msprop:Generator_UserColumnName="CheckOutDate" msprop:Generator_ColumnVarNameInTable="columnCheckOutDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TotalPrice" msprop:Generator_ColumnPropNameInTable="TotalPriceColumn" msprop:Generator_ColumnPropNameInRow="TotalPrice" msprop:Generator_UserColumnName="TotalPrice" msprop:Generator_ColumnVarNameInTable="columnTotalPrice" type="xs:double" minOccurs="0" />
+              <xs:element name="Discount" msprop:Generator_ColumnPropNameInTable="DiscountColumn" msprop:Generator_ColumnPropNameInRow="Discount" msprop:Generator_UserColumnName="Discount" msprop:Generator_ColumnVarNameInTable="columnDiscount" type="xs:int" minOccurs="0" />
+              <xs:element name="FinalPrice" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="FinalPriceColumn" msprop:Generator_ColumnPropNameInRow="FinalPrice" msprop:Generator_UserColumnName="FinalPrice" msprop:Generator_ColumnVarNameInTable="columnFinalPrice" type="xs:double" minOccurs="0" />
+              <xs:element name="StatusText" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="StatusTextColumn" msprop:Generator_ColumnPropNameInRow="StatusText" msprop:Generator_UserColumnName="StatusText" msprop:Generator_ColumnVarNameInTable="columnStatusText" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="15" />
@@ -859,10 +873,10 @@ WHERE idCategory = @categoryID</CommandText>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK__ChiTietHo__idBil__5EBF139D" msdata:parent="HoaDon" msdata:child="ChiTietHoaDon" msdata:parentkey="id" msdata:childkey="idBill" msprop:Generator_UserParentTable="HoaDon" msprop:Generator_UserChildTable="ChiTietHoaDon" msprop:Generator_RelationVarName="relationFK__ChiTietHo__idBil__5EBF139D" msprop:Generator_ChildPropName="GetChiTietHoaDonRows" msprop:Generator_UserRelationName="FK__ChiTietHo__idBil__5EBF139D" msprop:Generator_ParentPropName="HoaDonRow" />
-      <msdata:Relationship name="FK__ChiTietHo__idFoo__5FB337D6" msdata:parent="MonAn" msdata:child="ChiTietHoaDon" msdata:parentkey="id" msdata:childkey="idFood" msprop:Generator_UserParentTable="MonAn" msprop:Generator_UserChildTable="ChiTietHoaDon" msprop:Generator_RelationVarName="relationFK__ChiTietHo__idFoo__5FB337D6" msprop:Generator_ChildPropName="GetChiTietHoaDonRows" msprop:Generator_UserRelationName="FK__ChiTietHo__idFoo__5FB337D6" msprop:Generator_ParentPropName="MonAnRow" />
-      <msdata:Relationship name="FK__HoaDon__idTable__5AEE82B9" msdata:parent="Ban" msdata:child="HoaDon" msdata:parentkey="id" msdata:childkey="idTable" msprop:Generator_UserParentTable="Ban" msprop:Generator_UserChildTable="HoaDon" msprop:Generator_RelationVarName="relationFK__HoaDon__idTable__5AEE82B9" msprop:Generator_ChildPropName="GetHoaDonRows" msprop:Generator_ParentPropName="BanRow" msprop:Generator_UserRelationName="FK__HoaDon__idTable__5AEE82B9" />
-      <msdata:Relationship name="FK__MonAn__idCategor__52593CB8" msdata:parent="DanhMuc" msdata:child="MonAn" msdata:parentkey="id" msdata:childkey="idCategory" msprop:Generator_UserParentTable="DanhMuc" msprop:Generator_UserChildTable="MonAn" msprop:Generator_RelationVarName="relationFK__MonAn__idCategor__52593CB8" msprop:Generator_ChildPropName="GetMonAnRows" msprop:Generator_ParentPropName="DanhMucRow" msprop:Generator_UserRelationName="FK__MonAn__idCategor__52593CB8" />
+      <msdata:Relationship name="FK__ChiTietHo__idBil__5EBF139D" msdata:parent="HoaDon" msdata:child="ChiTietHoaDon" msdata:parentkey="id" msdata:childkey="idBill" msprop:Generator_UserParentTable="HoaDon" msprop:Generator_UserChildTable="ChiTietHoaDon" msprop:Generator_RelationVarName="relationFK__ChiTietHo__idBil__5EBF139D" msprop:Generator_ChildPropName="GetChiTietHoaDonRows" msprop:Generator_ParentPropName="HoaDonRow" msprop:Generator_UserRelationName="FK__ChiTietHo__idBil__5EBF139D" />
+      <msdata:Relationship name="FK__ChiTietHo__idFoo__5FB337D6" msdata:parent="MonAn" msdata:child="ChiTietHoaDon" msdata:parentkey="id" msdata:childkey="idFood" msprop:Generator_UserParentTable="MonAn" msprop:Generator_UserChildTable="ChiTietHoaDon" msprop:Generator_RelationVarName="relationFK__ChiTietHo__idFoo__5FB337D6" msprop:Generator_ChildPropName="GetChiTietHoaDonRows" msprop:Generator_ParentPropName="MonAnRow" msprop:Generator_UserRelationName="FK__ChiTietHo__idFoo__5FB337D6" />
+      <msdata:Relationship name="FK__HoaDon__idTable__5AEE82B9" msdata:parent="Ban" msdata:child="HoaDon" msdata:parentkey="id" msdata:childkey="idTable" msprop:Generator_UserParentTable="Ban" msprop:Generator_UserChildTable="HoaDon" msprop:Generator_RelationVarName="relationFK__HoaDon__idTable__5AEE82B9" msprop:Generator_ChildPropName="GetHoaDonRows" msprop:Generator_UserRelationName="FK__HoaDon__idTable__5AEE82B9" msprop:Generator_ParentPropName="BanRow" />
+      <msdata:Relationship name="FK__MonAn__idCategor__52593CB8" msdata:parent="DanhMuc" msdata:child="MonAn" msdata:parentkey="id" msdata:childkey="idCategory" msprop:Generator_UserParentTable="DanhMuc" msprop:Generator_UserChildTable="MonAn" msprop:Generator_RelationVarName="relationFK__MonAn__idCategor__52593CB8" msprop:Generator_ChildPropName="GetMonAnRows" msprop:Generator_UserRelationName="FK__MonAn__idCategor__52593CB8" msprop:Generator_ParentPropName="DanhMucRow" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

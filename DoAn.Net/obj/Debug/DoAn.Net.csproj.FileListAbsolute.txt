@@ -10,3 +10,4 @@ C:\Users\rober\OneDrive\Tài liệu\DoAn.Net\DoAn.Net\obj\Debug\DoAn.Net.cspro
 C:\Users\rober\OneDrive\Tài liệu\DoAn.Net\DoAn.Net\obj\Debug\DoAn.Net.exe
 C:\Users\rober\OneDrive\Tài liệu\DoAn.Net\DoAn.Net\obj\Debug\DoAn.Net.pdb
 C:\Users\rober\OneDrive\Tài liệu\DoAn.Net\DoAn.Net\obj\Debug\DoAn.Net.exe.config
+C:\Users\rober\OneDrive\Tài liệu\DoAn.Net\DoAn.Net\obj\Debug\DoAn.Net.fAccountProfile.resources
