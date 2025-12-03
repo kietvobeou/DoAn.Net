@@ -74,6 +74,7 @@ namespace DoAn.Net
             add { updateAccount += value; }
             remove { updateAccount -= value; }
         }
+
     }
 
     public class AccountEvent : EventArgs

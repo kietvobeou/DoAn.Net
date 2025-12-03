@@ -13,191 +13,200 @@ namespace DoAn.Net
 {
     public partial class fAdmin : Form
     {
-        private BindingSource foodList = new BindingSource();
-        private BindingSource accountList = new BindingSource();
-        private BindingSource categoryList = new BindingSource();
-        private BindingSource tableList = new BindingSource();
-        private DBTaiKhoan dbTaiKhoan = new DBTaiKhoan();
-        private DBMonAn dbMonAn = new DBMonAn();
-        private DBDanhMuc dbDanhMuc = new DBDanhMuc();
-        private DBHoaDon dbHoaDon = new DBHoaDon();
-        private DBReport dbReport = new DBReport();
-        private DBBan dbBan = new DBBan();
-        public TaiKhoan loginTaiKhoan;
-        private bool isAddingFood = false;
-        private bool isAddingAccount = false;
-        private bool isAddingCategory = false;
-        private bool isAddingTable = false;
+        private BindingSource dsMonAn = new BindingSource();
+        private BindingSource dsTaiKhoan = new BindingSource();
+        private BindingSource dsDanhMuc = new BindingSource();
+        private BindingSource dsBan = new BindingSource();
+        private DBTaiKhoan taiKhoanDB = new DBTaiKhoan();
+        private DBMonAn monAnDB = new DBMonAn();
+        private DBDanhMuc danhMucDB = new DBDanhMuc();
+        private DBHoaDon hoaDonDB = new DBHoaDon();
+        private DBReport baoCaoDB = new DBReport();
+        private DBBan banDB = new DBBan();
+        public TaiKhoan taiKhoanDangNhap;
+        private bool dangThemMon = false;
+        private bool dangThemTaiKhoan = false;
+        private bool dangThemDanhMuc = false;
+        private bool dangThemBan = false;
 
         public fAdmin()
         {
             InitializeComponent();
-            GanSuKien();
-            LoadData();
+            GanCacSuKien();
+            TaiDuLieu();
         }
 
-        private void GanSuKien()
+        private void GanCacSuKien()
         {
-            // Gán sự kiện theo đúng tên của controls
-            this.btnThongKe.Click += new System.EventHandler(this.btnThongKe_Click);
-            this.btnFirstBillPage.Click += new System.EventHandler(this.btnFirstBillPage_Click);
-            this.btnPrevioursBillPage.Click += new System.EventHandler(this.btnPreviousBillPage_Click);
-            this.btnNextBillPage.Click += new System.EventHandler(this.btnNextBillPage_Click);
-            this.btnLastBillPage.Click += new System.EventHandler(this.btnLastBillPage_Click);
-            this.txbPageBill.TextChanged += new System.EventHandler(this.txbPageBill_TextChanged);
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
-            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
-            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
-            this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
-            this.btnTim.Click += new System.EventHandler(this.btnTim_Click);
-            this.txtID.TextChanged += new System.EventHandler(this.txtID_TextChanged);
-            this.dgvThucAn.SelectionChanged += new System.EventHandler(this.dgvThucAn_SelectionChanged);
-            this.btnThem3.Click += new System.EventHandler(this.btnThem3_Click);
-            this.btnXoa3.Click += new System.EventHandler(this.btnXoa3_Click);
-            this.btnSua3.Click += new System.EventHandler(this.btnSua3_Click);
-            this.btnLuuAccount.Click += new System.EventHandler(this.btnLuuAccount_Click);
-            this.btnResetPassword.Click += new System.EventHandler(this.btnResetPassword_Click);
-            this.btnViewReport.Click += new System.EventHandler(this.btnViewReport_Click);
-            this.btnToday.Click += new System.EventHandler(this.btnToday_Click);
-            this.btnThisMonth.Click += new System.EventHandler(this.btnThisMonth_Click);
-            this.btnLastMonth.Click += new System.EventHandler(this.btnLastMonth_Click);
-            this.btnExportExcel.Click += new System.EventHandler(this.btnExportExcel_Click);
-            this.Load += new System.EventHandler(this.fAdmin_Load);
-            this.dgvAccount.SelectionChanged += new System.EventHandler(this.dgvAccount_SelectionChanged);
-            this.btnThem1.Click += new System.EventHandler(this.btnThem1_Click);
-            this.btnXoa1.Click += new System.EventHandler(this.btnXoa1_Click);
-            this.btnSua1.Click += new System.EventHandler(this.btnSua1_Click);
-            this.btnLuu1.Click += new System.EventHandler(this.btnLuu1_Click);
-            this.dgvDoanhMuc.SelectionChanged += new System.EventHandler(this.dgvDoanhMuc_SelectionChanged);
-            this.btnThem2.Click += new System.EventHandler(this.btnThem2_Click);
-            this.btnXoa2.Click += new System.EventHandler(this.btnXoa2_Click);
-            this.btnSua2.Click += new System.EventHandler(this.btnSua2_Click);
-            this.btnLuu2.Click += new System.EventHandler(this.btnLuu2_Click);
-            this.dgvBan.SelectionChanged += new System.EventHandler(this.dgvBan_SelectionChanged);
-            this.btnResetPassword.Click += new System.EventHandler(this.btnResetPassword_Click);
+            this.btnThem.Click += this.btnThem_Click;
+            this.btnSua.Click += this.btnSua_Click;
+            this.btnXoa.Click += this.btnXoa_Click;
+            this.btnLuu.Click += this.btnLuu_Click;
+            this.btnTim.Click += this.btnTim_Click;
+            this.txtID.TextChanged += this.txtID_TextChanged;
+            this.dgvThucAn.SelectionChanged += this.dgvThucAn_SelectionChanged;
+            this.btnThem3.Click += this.btnThem3_Click;
+            this.btnXoa3.Click += this.btnXoa3_Click;
+            this.btnSua3.Click += this.btnSua3_Click;
+            this.btnLuuAccount.Click += this.btnLuuAccount_Click;
+            this.btnResetPassword.Click += this.btnResetPassword_Click;
+            this.btnThem1.Click += this.btnThem1_Click;
+            this.btnXoa1.Click += this.btnXoa1_Click;
+            this.btnSua1.Click += this.btnSua1_Click;
+            this.btnLuu1.Click += this.btnLuu1_Click;
+            this.btnThem2.Click += this.btnThem2_Click;
+            this.btnXoa2.Click += this.btnXoa2_Click;
+            this.btnSua2.Click += this.btnSua2_Click;
+            this.btnLuu2.Click += this.btnLuu2_Click;
+            this.btnThongKe.Click += this.btnThongKe_Click;
+            this.btnFirstBillPage.Click += this.btnFirstBillPage_Click;
+            this.btnPrevioursBillPage.Click += this.btnPreviousBillPage_Click;
+            this.btnNextBillPage.Click += this.btnNextBillPage_Click;
+            this.btnLastBillPage.Click += this.btnLastBillPage_Click;
+            this.btnViewReport.Click += this.btnViewReport_Click;
+            this.btnToday.Click += this.btnToday_Click;
+            this.btnThisMonth.Click += this.btnThisMonth_Click;
+            this.btnLastMonth.Click += this.btnLastMonth_Click;
+            this.btnExportExcel.Click += this.btnExportExcel_Click;
+            this.Load += this.fAdmin_Load;
+            this.dgvAccount.SelectionChanged += this.dgvAccount_SelectionChanged;
+            this.dgvDoanhMuc.SelectionChanged += this.dgvDoanhMuc_SelectionChanged;
+            this.dgvBan.SelectionChanged += this.dgvBan_SelectionChanged;
+            this.txbPageBill.TextChanged += this.txbPageBill_TextChanged;
         }
 
-        #region methods
+        #region Các phương thức
 
-        private void LoadData()
+        private void TaiDuLieu()
         {
             try
             {
-                LoadListFood();
-                LoadAccount();
-                LoadListCategory();
-                LoadListTable();
-                LoadDateTimePickerBill();
-                LoadListBillByDate(dtpBatDau.Value, dtpKetThuc.Value);
-                LoadCategoryIntoCombobox(cboDoanhMuc);
-                dgvThucAn.DataSource = foodList;
-                dgvAccount.DataSource = accountList;
-                dgvDoanhMuc.DataSource = categoryList;
-                dgvBan.DataSource = tableList;
-                DataBindingsMonAn();
-                DataBindingsAccount();
-                DataBindingsCategory();
-                DataBindingsTable();
+                TaiDanhSachMonAn();
+                TaiTaiKhoan();
+                TaiDanhSachDanhMuc();
+                TaiDanhSachBan();
+                TaiThoiGianChoBill();
+                TaiHoaDonTheoNgay(dtpBatDau.Value, dtpKetThuc.Value);
+                TaiDanhMucVaoCombobox(cboDoanhMuc);
+                dgvThucAn.DataSource = dsMonAn;
+                dgvAccount.DataSource = dsTaiKhoan;
+                dgvDoanhMuc.DataSource = dsDanhMuc;
+                dgvBan.DataSource = dsBan;
+                GanBindingMonAn();
+                GanBindingTaiKhoan();
+                GanBindingDanhMuc();
+                GanBindingBan();
                 dgvThucAn.ClearSelection();
                 dgvAccount.ClearSelection();
                 dgvDoanhMuc.ClearSelection();
                 dgvBan.ClearSelection();
-                SetFoodControlsEnabled(false);
-                SetAccountControlsEnabled(false);
-                SetCategoryControlsEnabled(false);
-                SetTableControlsEnabled(false);
+                TatBatDieuKhienMonAn(false);
+                TatBatDieuKhienTaiKhoan(false);
+                TatBatDieuKhienDanhMuc(false);
+                TatBatDieuKhienBan(false);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi trong LoadData: {ex.Message}", "Lỗi",
+                MessageBox.Show("Bị lỗi khi tải dữ liệu: " + ex.Message, "Lỗi",
                                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void DataBindingsMonAn()
+        private void GanBindingMonAn()
         {
             txtTenMon.DataBindings.Clear();
             txtID.DataBindings.Clear();
             nmGia.DataBindings.Clear();
-            txtTenMon.DataBindings.Add(new Binding("Text", dgvThucAn.DataSource, "Name", true, DataSourceUpdateMode.Never));
-            txtID.DataBindings.Add(new Binding("Text", dgvThucAn.DataSource, "ID", true, DataSourceUpdateMode.Never));
-            nmGia.DataBindings.Add(new Binding("Value", dgvThucAn.DataSource, "Price", true, DataSourceUpdateMode.Never));
+
+            txtTenMon.DataBindings.Add(new Binding("Text", dgvThucAn.DataSource, "Name"));
+            txtID.DataBindings.Add(new Binding("Text", dgvThucAn.DataSource, "ID"));
+            nmGia.DataBindings.Add(new Binding("Value", dgvThucAn.DataSource, "Price"));
         }
 
-        private void DataBindingsAccount()
+        private void GanBindingTaiKhoan()
         {
             txtTenTK.DataBindings.Clear();
             txtTenHienThi.DataBindings.Clear();
             nmrLoai.DataBindings.Clear();
-            txtTenTK.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "UserName", true, DataSourceUpdateMode.Never));
-            txtTenHienThi.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "DisplayName", true, DataSourceUpdateMode.Never));
-            nmrLoai.DataBindings.Add(new Binding("Value", dgvAccount.DataSource, "Type", true, DataSourceUpdateMode.Never));
+
+            txtTenTK.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "UserName"));
+            txtTenHienThi.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "DisplayName"));
+            nmrLoai.DataBindings.Add(new Binding("Value", dgvAccount.DataSource, "Type"));
         }
 
-        private void DataBindingsCategory()
+        private void GanBindingDanhMuc()
         {
             txtMaDoanhMuc.DataBindings.Clear();
             txtTenDoanhMuc.DataBindings.Clear();
-            txtMaDoanhMuc.DataBindings.Add(new Binding("Text", dgvDoanhMuc.DataSource, "ID", true, DataSourceUpdateMode.Never));
-            txtTenDoanhMuc.DataBindings.Add(new Binding("Text", dgvDoanhMuc.DataSource, "Name", true, DataSourceUpdateMode.Never));
+
+            txtMaDoanhMuc.DataBindings.Add(new Binding("Text", dgvDoanhMuc.DataSource, "ID"));
+            txtTenDoanhMuc.DataBindings.Add(new Binding("Text", dgvDoanhMuc.DataSource, "Name"));
         }
 
-        private void DataBindingsTable()
+        private void GanBindingBan()
         {
             txtIDTable.DataBindings.Clear();
             txtTenBan.DataBindings.Clear();
             txtTrangThai.DataBindings.Clear();
-            txtIDTable.DataBindings.Add(new Binding("Text", dgvBan.DataSource, "Id", true, DataSourceUpdateMode.Never));
-            txtTenBan.DataBindings.Add(new Binding("Text", dgvBan.DataSource, "Name", true, DataSourceUpdateMode.Never));
-            txtTrangThai.DataBindings.Add(new Binding("Text", dgvBan.DataSource, "Status", true, DataSourceUpdateMode.Never));
+
+            txtIDTable.DataBindings.Add(new Binding("Text", dgvBan.DataSource, "Id"));
+            txtTenBan.DataBindings.Add(new Binding("Text", dgvBan.DataSource, "Name"));
+            txtTrangThai.DataBindings.Add(new Binding("Text", dgvBan.DataSource, "Status"));
         }
 
-        private void SetFoodControlsEnabled(bool enabled)
+        private void TatBatDieuKhienMonAn(bool bat)
         {
-            txtTenMon.Enabled = enabled;
-            nmGia.Enabled = enabled;
-            cboDoanhMuc.Enabled = enabled;
-            btnLuu.Enabled = enabled;
-            btnSua.Enabled = !enabled;
-            btnXoa.Enabled = !enabled;
-            btnThem.Enabled = !enabled;
+            txtTenMon.Enabled = bat;
+            nmGia.Enabled = bat;
+            cboDoanhMuc.Enabled = bat;
+            btnLuu.Enabled = bat;
+
+            btnSua.Enabled = !bat;
+            btnXoa.Enabled = !bat;
+            btnThem.Enabled = !bat;
+
             txtID.Enabled = false;
         }
 
-        private void SetAccountControlsEnabled(bool enabled)
+        private void TatBatDieuKhienTaiKhoan(bool bat)
         {
-            txtTenTK.Enabled = enabled;
-            txtTenHienThi.Enabled = enabled;
-            nmrLoai.Enabled = enabled;
-            btnLuuAccount.Enabled = enabled;
-            btnSua3.Enabled = !enabled;
-            btnXoa3.Enabled = !enabled;
-            btnThem3.Enabled = !enabled;
-            btnResetPassword.Enabled = !enabled;
+            txtTenTK.Enabled = bat;
+            txtTenHienThi.Enabled = bat;
+            nmrLoai.Enabled = bat;
+            btnLuuAccount.Enabled = bat;
+
+            btnSua3.Enabled = !bat;
+            btnXoa3.Enabled = !bat;
+            btnThem3.Enabled = !bat;
+            btnResetPassword.Enabled = !bat;
         }
 
-        private void SetCategoryControlsEnabled(bool enabled)
+        private void TatBatDieuKhienDanhMuc(bool bat)
         {
-            txtTenDoanhMuc.Enabled = enabled;
-            btnLuu1.Enabled = enabled;
-            btnSua1.Enabled = !enabled;
-            btnXoa1.Enabled = !enabled;
-            btnThem1.Enabled = !enabled;
+            txtTenDoanhMuc.Enabled = bat;
+            btnLuu1.Enabled = bat;
+
+            btnSua1.Enabled = !bat;
+            btnXoa1.Enabled = !bat;
+            btnThem1.Enabled = !bat;
+
             txtMaDoanhMuc.Enabled = false;
         }
 
-        private void SetTableControlsEnabled(bool enabled)
+        private void TatBatDieuKhienBan(bool bat)
         {
-            txtTenBan.Enabled = enabled;
-            txtTrangThai.Enabled = enabled;
-            btnLuu2.Enabled = enabled;
-            btnSua2.Enabled = !enabled;
-            btnXoa2.Enabled = !enabled;
-            btnThem2.Enabled = !enabled;
+            txtTenBan.Enabled = bat;
+            txtTrangThai.Enabled = bat;
+            btnLuu2.Enabled = bat;
+
+            btnSua2.Enabled = !bat;
+            btnXoa2.Enabled = !bat;
+            btnThem2.Enabled = !bat;
+
             txtIDTable.Enabled = false;
         }
 
-        private void ClearFoodControls()
+        private void XoaDuLieuMonAn()
         {
             txtTenMon.Text = "";
             txtID.Text = "";
@@ -205,114 +214,113 @@ namespace DoAn.Net
             cboDoanhMuc.SelectedIndex = -1;
         }
 
-        private void ClearAccountControls()
+        private void XoaDuLieuTaiKhoan()
         {
             txtTenTK.Text = "";
             txtTenHienThi.Text = "";
             nmrLoai.Value = 0;
         }
 
-        private void ClearCategoryControls()
+        private void XoaDuLieuDanhMuc()
         {
             txtMaDoanhMuc.Text = "";
             txtTenDoanhMuc.Text = "";
         }
 
-        private void ClearTableControls()
+        private void XoaDuLieuBan()
         {
             txtIDTable.Text = "";
             txtTenBan.Text = "";
             txtTrangThai.Text = "";
         }
 
-        private void LoadAccount()
+        private void TaiTaiKhoan()
         {
             try
             {
-                accountList.DataSource = dbTaiKhoan.LayDSTK();
+                dsTaiKhoan.DataSource = taiKhoanDB.LayDSTK();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi tải tài khoản: " + ex.Message);
+                MessageBox.Show("Lỗi tải tài khoản: " + ex.Message);
             }
         }
 
-        private void LoadListCategory()
+        private void TaiDanhSachDanhMuc()
         {
             try
             {
-                categoryList.DataSource = dbDanhMuc.GetListCategory();
+                dsDanhMuc.DataSource = danhMucDB.GetListCategory();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi tải danh mục: " + ex.Message);
+                MessageBox.Show("Lỗi tải danh mục: " + ex.Message);
             }
         }
 
-        private void LoadListTable()
+        private void TaiDanhSachBan()
         {
             try
             {
-                tableList.DataSource = dbBan.LoadTableList();
+                dsBan.DataSource = banDB.LoadTableList();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi tải bàn: " + ex.Message);
+                MessageBox.Show("Lỗi tải bàn: " + ex.Message);
             }
         }
 
-        private void LoadDateTimePickerBill()
+        private void TaiThoiGianChoBill()
         {
-            DateTime today = DateTime.Now;
-            dtpBatDau.Value = new DateTime(today.Year, today.Month, 1);
+            DateTime homNay = DateTime.Now;
+            dtpBatDau.Value = new DateTime(homNay.Year, homNay.Month, 1);
             dtpKetThuc.Value = dtpBatDau.Value.AddMonths(1).AddDays(-1);
         }
 
-        private void LoadListBillByDate(DateTime checkIn, DateTime checkOut)
+        private void TaiHoaDonTheoNgay(DateTime ngayBatDau, DateTime ngayKetThuc)
         {
             try
             {
-                dgvBill.DataSource = dbHoaDon.GetBillListByDate(checkIn, checkOut);
+                dgvBill.DataSource = hoaDonDB.GetBillListByDate(ngayBatDau, ngayKetThuc);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi tải hóa đơn: " + ex.Message);
+                MessageBox.Show("Lỗi tải hóa đơn: " + ex.Message);
             }
         }
 
-        private void LoadCategoryIntoCombobox(ComboBox cb)
+        private void TaiDanhMucVaoCombobox(ComboBox cb)
         {
             try
             {
-                categoryList.DataSource = dbDanhMuc.GetListCategory();
-                cb.DataSource = categoryList;
+                cb.DataSource = dsDanhMuc.DataSource;
                 cb.DisplayMember = "Name";
                 cb.ValueMember = "ID";
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi tải danh mục: " + ex.Message);
+                MessageBox.Show("Lỗi tải danh mục vào combobox: " + ex.Message);
             }
         }
 
-        private void LoadListFood()
+        private void TaiDanhSachMonAn()
         {
             try
             {
-                foodList.DataSource = dbMonAn.GetListFood();
+                dsMonAn.DataSource = monAnDB.GetListFood();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi tải món ăn: " + ex.Message);
+                MessageBox.Show("Lỗi tải món ăn: " + ex.Message);
             }
         }
 
-        private bool InsertTableToDatabase(string name, string status)
+        private bool ThemBanVaoCSDL(string ten, string trangThai)
         {
             try
             {
                 var adapter = new BanTableAdapter();
-                adapter.Insert(name, status);
+                adapter.Insert(ten, trangThai);
                 return true;
             }
             catch
@@ -321,13 +329,13 @@ namespace DoAn.Net
             }
         }
 
-        private bool UpdateTableInDatabase(int id, string name, string status)
+        private bool SuaBanTrongCSDL(int id, string ten, string trangThai)
         {
             try
             {
                 var adapter = new BanTableAdapter();
-                int result = adapter.UpdateTable(name, status, id);
-                return result > 0;
+                int ketQua = adapter.UpdateTable(ten, trangThai, id);
+                return ketQua > 0;
             }
             catch
             {
@@ -335,28 +343,24 @@ namespace DoAn.Net
             }
         }
 
-        private bool DeleteTableFromDatabase(int id)
+        private bool XoaBanKhoiCSDL(int id)
         {
             try
             {
                 var adapter = new BanTableAdapter();
-                int result = adapter.DeleteTable(id);
-                return result > 0;
+                int ketQua = adapter.DeleteTable(id);
+                return ketQua > 0;
             }
             catch
             {
                 return false;
             }
         }
-
-        #endregion
-
-        #region events - Food
         private void btnThem_Click(object sender, EventArgs e)
         {
-            isAddingFood = true;
-            ClearFoodControls();
-            SetFoodControlsEnabled(true);
+            dangThemMon = true;
+            XoaDuLieuMonAn();
+            TatBatDieuKhienMonAn(true);
             txtTenMon.Focus();
         }
 
@@ -364,12 +368,12 @@ namespace DoAn.Net
         {
             if (string.IsNullOrEmpty(txtID.Text))
             {
-                MessageBox.Show("Vui lòng chọn món ăn cần sửa");
+                MessageBox.Show("Chưa chọn món ăn nào để sửa");
                 return;
             }
 
-            isAddingFood = false;
-            SetFoodControlsEnabled(true);
+            dangThemMon = false;
+            TatBatDieuKhienMonAn(true);
             txtTenMon.Focus();
         }
 
@@ -377,71 +381,71 @@ namespace DoAn.Net
         {
             try
             {
-                if (isAddingFood)
+                if (dangThemMon)
                 {
-                    string name = txtTenMon.Text;
-                    int categoryID = (cboDoanhMuc.SelectedValue != null) ? (int)cboDoanhMuc.SelectedValue : 0;
-                    float price = (float)nmGia.Value;
+                    string ten = txtTenMon.Text;
+                    int maDanhMuc = (cboDoanhMuc.SelectedValue != null) ? (int)cboDoanhMuc.SelectedValue : 0;
+                    float gia = (float)nmGia.Value;
 
-                    if (string.IsNullOrEmpty(name))
+                    if (string.IsNullOrEmpty(ten))
                     {
-                        MessageBox.Show("Vui lòng nhập tên món");
+                        MessageBox.Show("Chưa nhập tên món");
                         return;
                     }
 
-                    if (categoryID == 0)
+                    if (maDanhMuc == 0)
                     {
-                        MessageBox.Show("Vui lòng chọn danh mục");
+                        MessageBox.Show("Chưa chọn danh mục");
                         return;
                     }
 
-                    if (dbMonAn.InsertFood(name, categoryID, price))
+                    if (monAnDB.InsertFood(ten, maDanhMuc, gia))
                     {
-                        MessageBox.Show("Thêm món thành công");
-                        LoadListFood();
-                        SetFoodControlsEnabled(false);
-                        isAddingFood = false;
-                        ClearFoodControls();
+                        MessageBox.Show("Đã thêm món thành công");
+                        TaiDanhSachMonAn();
+                        TatBatDieuKhienMonAn(false);
+                        dangThemMon = false;
+                        XoaDuLieuMonAn();
                     }
                     else
                     {
-                        MessageBox.Show("Có lỗi khi thêm thức ăn");
+                        MessageBox.Show("Thêm món không thành công");
                     }
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(txtID.Text))
                     {
-                        MessageBox.Show("Vui lòng chọn món ăn cần sửa");
+                        MessageBox.Show("Chưa chọn món ăn nào để sửa");
                         return;
                     }
 
-                    string name = txtTenMon.Text;
-                    int categoryID = (cboDoanhMuc.SelectedValue != null) ? (int)cboDoanhMuc.SelectedValue : 0;
-                    float price = (float)nmGia.Value;
+                    string ten = txtTenMon.Text;
+                    int maDanhMuc = (cboDoanhMuc.SelectedValue != null) ? (int)cboDoanhMuc.SelectedValue : 0;
+                    float gia = (float)nmGia.Value;
                     int id = Convert.ToInt32(txtID.Text);
 
-                    if (string.IsNullOrEmpty(name))
+                    if (string.IsNullOrEmpty(ten))
                     {
-                        MessageBox.Show("Vui lòng nhập tên món");
+                        MessageBox.Show("Chưa nhập tên món");
                         return;
                     }
 
-                    if (categoryID == 0)
+                    if (maDanhMuc == 0)
                     {
-                        MessageBox.Show("Vui lòng chọn danh mục");
+                        MessageBox.Show("Chưa chọn danh mục");
                         return;
                     }
 
-                    if (dbMonAn.UpdateFood(id, name, categoryID, price))
+                    if (monAnDB.UpdateFood(id, ten, maDanhMuc, gia))
                     {
-                        MessageBox.Show("Sửa món thành công");
-                        LoadListFood();
-                        SetFoodControlsEnabled(false);
+                        MessageBox.Show("Đã sửa món thành công");
+                        TaiDanhSachMonAn();
+                        TatBatDieuKhienMonAn(false);
                     }
                     else
                     {
-                        MessageBox.Show("Có lỗi khi sửa thức ăn");
+                        MessageBox.Show("Sửa món không thành công");
                     }
                 }
             }
@@ -457,24 +461,24 @@ namespace DoAn.Net
             {
                 if (string.IsNullOrEmpty(txtID.Text))
                 {
-                    MessageBox.Show("Vui lòng chọn món ăn cần xóa");
+                    MessageBox.Show("Chưa chọn món ăn nào để xóa");
                     return;
                 }
 
                 int id = Convert.ToInt32(txtID.Text);
 
-                if (MessageBox.Show("Bạn có chắc chắn muốn xóa món này?", "Xác nhận",
+                if (MessageBox.Show("Bạn có chắc muốn xóa món này không?", "Xác nhận",
                     MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    if (dbMonAn.DeleteFood(id))
+                    if (monAnDB.DeleteFood(id))
                     {
-                        MessageBox.Show("Xóa món thành công");
-                        LoadListFood();
-                        ClearFoodControls();
+                        MessageBox.Show("Đã xóa món thành công");
+                        TaiDanhSachMonAn();
+                        XoaDuLieuMonAn();
                     }
                     else
                     {
-                        MessageBox.Show("Có lỗi khi xóa thức ăn");
+                        MessageBox.Show("Xóa món không thành công");
                     }
                 }
             }
@@ -488,12 +492,12 @@ namespace DoAn.Net
         {
             try
             {
-                string searchName = txtSearchFood.Text;
-                foodList.DataSource = dbMonAn.SearchFoodByName(searchName);
+                string tenCanTim = txtSearchFood.Text;
+                dsMonAn.DataSource = monAnDB.SearchFoodByName(tenCanTim);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi tìm kiếm món ăn: " + ex.Message);
+                MessageBox.Show("Lỗi khi tìm món ăn: " + ex.Message);
             }
         }
 
@@ -501,32 +505,29 @@ namespace DoAn.Net
         {
             try
             {
-                if (dgvThucAn.SelectedCells.Count > 0 && dgvThucAn.CurrentRow != null && !isAddingFood)
+                if (dgvThucAn.SelectedCells.Count > 0 && dgvThucAn.CurrentRow != null && !dangThemMon)
                 {
                     if (dgvThucAn.CurrentRow.Cells["IdCategory"]?.Value != null)
                     {
-                        int categoryID = (int)dgvThucAn.CurrentRow.Cells["IdCategory"].Value;
-                        var category = dbDanhMuc.GetCategoryByID(categoryID);
-                        if (category != null)
+                        int maDanhMuc = (int)dgvThucAn.CurrentRow.Cells["IdCategory"].Value;
+                        var danhMuc = danhMucDB.GetCategoryByID(maDanhMuc);
+                        if (danhMuc != null)
                         {
-                            cboDoanhMuc.SelectedValue = category.ID;
+                            cboDoanhMuc.SelectedValue = danhMuc.ID;
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi khi cập nhật combobox: " + ex.Message);
+                Console.WriteLine("Lỗi cập nhật combobox: " + ex.Message);
             }
         }
-        #endregion
-
-        #region events - Account
         private void btnThem3_Click(object sender, EventArgs e)
         {
-            isAddingAccount = true;
-            ClearAccountControls();
-            SetAccountControlsEnabled(true);
+            dangThemTaiKhoan = true;
+            XoaDuLieuTaiKhoan();
+            TatBatDieuKhienTaiKhoan(true);
             txtTenTK.Focus();
         }
 
@@ -534,12 +535,12 @@ namespace DoAn.Net
         {
             if (string.IsNullOrEmpty(txtTenTK.Text))
             {
-                MessageBox.Show("Vui lòng chọn tài khoản cần sửa");
+                MessageBox.Show("Chưa chọn tài khoản nào để sửa");
                 return;
             }
 
-            isAddingAccount = false;
-            SetAccountControlsEnabled(true);
+            dangThemTaiKhoan = false;
+            TatBatDieuKhienTaiKhoan(true);
             txtTenHienThi.Focus();
         }
 
@@ -547,64 +548,64 @@ namespace DoAn.Net
         {
             try
             {
-                if (isAddingAccount)
+                if (dangThemTaiKhoan)
                 {
-                    string userName = txtTenTK.Text;
-                    string displayName = txtTenHienThi.Text;
-                    int type = (int)nmrLoai.Value;
+                    string tenDangNhap = txtTenTK.Text;
+                    string tenHienThi = txtTenHienThi.Text;
+                    int loai = (int)nmrLoai.Value;
 
-                    if (string.IsNullOrEmpty(userName))
+                    if (string.IsNullOrEmpty(tenDangNhap))
                     {
-                        MessageBox.Show("Vui lòng nhập tên tài khoản");
+                        MessageBox.Show("Chưa nhập tên tài khoản");
                         return;
                     }
 
-                    if (string.IsNullOrEmpty(displayName))
+                    if (string.IsNullOrEmpty(tenHienThi))
                     {
-                        MessageBox.Show("Vui lòng nhập tên hiển thị");
+                        MessageBox.Show("Chưa nhập tên hiển thị");
                         return;
                     }
 
-                    if (dbTaiKhoan.ThemTK(userName, displayName, type))
+                    if (taiKhoanDB.ThemTK(tenDangNhap, tenHienThi, loai))
                     {
-                        MessageBox.Show("Thêm tài khoản thành công");
-                        LoadAccount();
-                        SetAccountControlsEnabled(false);
-                        isAddingAccount = false;
-                        ClearAccountControls();
+                        MessageBox.Show("Đã thêm tài khoản thành công");
+                        TaiTaiKhoan();
+                        TatBatDieuKhienTaiKhoan(false);
+                        dangThemTaiKhoan = false;
+                        XoaDuLieuTaiKhoan();
                     }
                     else
                     {
-                        MessageBox.Show("Thêm tài khoản thất bại");
+                        MessageBox.Show("Thêm tài khoản không thành công");
                     }
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(txtTenTK.Text))
                     {
-                        MessageBox.Show("Vui lòng chọn tài khoản cần sửa");
+                        MessageBox.Show("Chưa chọn tài khoản nào để sửa");
                         return;
                     }
 
-                    string userName = txtTenTK.Text;
-                    string displayName = txtTenHienThi.Text;
-                    int type = (int)nmrLoai.Value;
+                    string tenDangNhap = txtTenTK.Text;
+                    string tenHienThi = txtTenHienThi.Text;
+                    int loai = (int)nmrLoai.Value;
 
-                    if (string.IsNullOrEmpty(displayName))
+                    if (string.IsNullOrEmpty(tenHienThi))
                     {
-                        MessageBox.Show("Vui lòng nhập tên hiển thị");
+                        MessageBox.Show("Chưa nhập tên hiển thị");
                         return;
                     }
 
-                    if (dbTaiKhoan.CapNhatTK(userName, displayName, type))
+                    if (taiKhoanDB.CapNhatTK(tenDangNhap, tenHienThi, loai))
                     {
-                        MessageBox.Show("Cập nhật tài khoản thành công");
-                        LoadAccount();
-                        SetAccountControlsEnabled(false);
+                        MessageBox.Show("Đã cập nhật tài khoản thành công");
+                        TaiTaiKhoan();
+                        TatBatDieuKhienTaiKhoan(false);
                     }
                     else
                     {
-                        MessageBox.Show("Cập nhật tài khoản thất bại");
+                        MessageBox.Show("Cập nhật tài khoản không thành công");
                     }
                 }
             }
@@ -620,30 +621,30 @@ namespace DoAn.Net
             {
                 if (string.IsNullOrEmpty(txtTenTK.Text))
                 {
-                    MessageBox.Show("Vui lòng chọn tài khoản cần xóa");
+                    MessageBox.Show("Chưa chọn tài khoản nào để xóa");
                     return;
                 }
 
-                string userName = txtTenTK.Text;
+                string tenDangNhap = txtTenTK.Text;
 
-                if (loginTaiKhoan.UserName.Equals(userName))
+                if (taiKhoanDangNhap.UserName.Equals(tenDangNhap))
                 {
-                    MessageBox.Show("Vui lòng đừng xóa chính bạn chứ");
+                    MessageBox.Show("Không thể xóa tài khoản đang đăng nhập");
                     return;
                 }
 
-                if (MessageBox.Show("Bạn có chắc chắn muốn xóa tài khoản này?", "Xác nhận",
+                if (MessageBox.Show("Bạn có chắc muốn xóa tài khoản này không?", "Xác nhận",
                     MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    if (dbTaiKhoan.XoaTK(userName))
+                    if (taiKhoanDB.XoaTK(tenDangNhap))
                     {
-                        MessageBox.Show("Xóa tài khoản thành công");
-                        LoadAccount();
-                        ClearAccountControls();
+                        MessageBox.Show("Đã xóa tài khoản thành công");
+                        TaiTaiKhoan();
+                        XoaDuLieuTaiKhoan();
                     }
                     else
                     {
-                        MessageBox.Show("Xóa tài khoản thất bại");
+                        MessageBox.Show("Xóa tài khoản không thành công");
                     }
                 }
             }
@@ -659,30 +660,30 @@ namespace DoAn.Net
             {
                 if (string.IsNullOrEmpty(txtTenTK.Text))
                 {
-                    MessageBox.Show("Vui lòng chọn tài khoản cần reset mật khẩu");
+                    MessageBox.Show("Chưa chọn tài khoản nào để reset mật khẩu");
                     return;
                 }
 
-                string userName = txtTenTK.Text;
-                DialogResult dialogResult = MessageBox.Show(
-                    $"Bạn có chắc chắn muốn reset mật khẩu cho tài khoản '{userName}'?\nMật khẩu sẽ được đặt về mặc định là '123456'",
+                string tenDangNhap = txtTenTK.Text;
+                DialogResult xacNhan = MessageBox.Show(
+                    $"Bạn có chắc muốn reset mật khẩu cho tài khoản '{tenDangNhap}'?\nMật khẩu sẽ được đặt lại là '123456'",
                     "Xác nhận Reset Mật khẩu",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
 
-                if (dialogResult == DialogResult.Yes)
+                if (xacNhan == DialogResult.Yes)
                 {
-                    if (dbTaiKhoan.ResetPassword(userName))
+                    if (taiKhoanDB.ResetPassword(tenDangNhap))
                     {
-                        MessageBox.Show($"Reset mật khẩu thành công!\nTài khoản: {userName}\nMật khẩu mới: 123456",
+                        MessageBox.Show($"Đã reset mật khẩu thành công!\nTài khoản: {tenDangNhap}\nMật khẩu mới: 123456",
                                       "Thành công",
                                       MessageBoxButtons.OK,
                                       MessageBoxIcon.Information);
-                        dgvAccount.DataSource = dbTaiKhoan.LayDSTK();
+                        TaiTaiKhoan();
                     }
                     else
                     {
-                        MessageBox.Show("Reset mật khẩu thất bại. Vui lòng thử lại!", "Lỗi",
+                        MessageBox.Show("Reset mật khẩu không thành công", "Lỗi",
                                       MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -694,13 +695,11 @@ namespace DoAn.Net
             }
         }
         #endregion
-
-        #region events - Category
         private void btnThem1_Click(object sender, EventArgs e)
         {
-            isAddingCategory = true;
-            ClearCategoryControls();
-            SetCategoryControlsEnabled(true);
+            dangThemDanhMuc = true;
+            XoaDuLieuDanhMuc();
+            TatBatDieuKhienDanhMuc(true);
             txtTenDoanhMuc.Focus();
         }
 
@@ -708,12 +707,12 @@ namespace DoAn.Net
         {
             if (string.IsNullOrEmpty(txtMaDoanhMuc.Text))
             {
-                MessageBox.Show("Vui lòng chọn danh mục cần sửa");
+                MessageBox.Show("Chưa chọn danh mục nào để sửa");
                 return;
             }
 
-            isAddingCategory = false;
-            SetCategoryControlsEnabled(true);
+            dangThemDanhMuc = false;
+            TatBatDieuKhienDanhMuc(true);
             txtTenDoanhMuc.Focus();
         }
 
@@ -721,57 +720,57 @@ namespace DoAn.Net
         {
             try
             {
-                if (isAddingCategory)
+                if (dangThemDanhMuc)
                 {
-                    string name = txtTenDoanhMuc.Text;
+                    string ten = txtTenDoanhMuc.Text;
 
-                    if (string.IsNullOrEmpty(name))
+                    if (string.IsNullOrEmpty(ten))
                     {
-                        MessageBox.Show("Vui lòng nhập tên danh mục");
+                        MessageBox.Show("Chưa nhập tên danh mục");
                         return;
                     }
 
-                    if (dbDanhMuc.InsertCategory(name))
+                    if (danhMucDB.InsertCategory(ten))
                     {
-                        MessageBox.Show("Thêm danh mục thành công");
-                        LoadListCategory();
-                        LoadCategoryIntoCombobox(cboDoanhMuc);
-                        SetCategoryControlsEnabled(false);
-                        isAddingCategory = false;
-                        ClearCategoryControls();
+                        MessageBox.Show("Đã thêm danh mục thành công");
+                        TaiDanhSachDanhMuc();
+                        TaiDanhMucVaoCombobox(cboDoanhMuc);
+                        TatBatDieuKhienDanhMuc(false);
+                        dangThemDanhMuc = false;
+                        XoaDuLieuDanhMuc();
                     }
                     else
                     {
-                        MessageBox.Show("Thêm danh mục thất bại");
+                        MessageBox.Show("Thêm danh mục không thành công");
                     }
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(txtMaDoanhMuc.Text))
                     {
-                        MessageBox.Show("Vui lòng chọn danh mục cần sửa");
+                        MessageBox.Show("Chưa chọn danh mục nào để sửa");
                         return;
                     }
 
-                    string name = txtTenDoanhMuc.Text;
+                    string ten = txtTenDoanhMuc.Text;
                     int id = Convert.ToInt32(txtMaDoanhMuc.Text);
 
-                    if (string.IsNullOrEmpty(name))
+                    if (string.IsNullOrEmpty(ten))
                     {
-                        MessageBox.Show("Vui lòng nhập tên danh mục");
+                        MessageBox.Show("Chưa nhập tên danh mục");
                         return;
                     }
 
-                    if (dbDanhMuc.UpdateCategory(id, name))
+                    if (danhMucDB.UpdateCategory(id, ten))
                     {
-                        MessageBox.Show("Cập nhật danh mục thành công");
-                        LoadListCategory();
-                        LoadCategoryIntoCombobox(cboDoanhMuc);
-                        SetCategoryControlsEnabled(false);
+                        MessageBox.Show("Đã cập nhật danh mục thành công");
+                        TaiDanhSachDanhMuc();
+                        TaiDanhMucVaoCombobox(cboDoanhMuc);
+                        TatBatDieuKhienDanhMuc(false);
                     }
                     else
                     {
-                        MessageBox.Show("Cập nhật danh mục thất bại");
+                        MessageBox.Show("Cập nhật danh mục không thành công");
                     }
                 }
             }
@@ -787,30 +786,32 @@ namespace DoAn.Net
             {
                 if (string.IsNullOrEmpty(txtMaDoanhMuc.Text))
                 {
-                    MessageBox.Show("Vui lòng chọn danh mục cần xóa");
+                    MessageBox.Show("Chưa chọn danh mục nào để xóa");
                     return;
                 }
+
                 int id = Convert.ToInt32(txtMaDoanhMuc.Text);
-                if (dbMonAn.IsCategoryInUse(id))
+
+                if (monAnDB.IsCategoryInUse(id))
                 {
                     MessageBox.Show("Không thể xóa danh mục này vì có món ăn đang sử dụng", "Lỗi",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                if (MessageBox.Show("Bạn có chắc chắn muốn xóa danh mục này?", "Xác nhận",
+                if (MessageBox.Show("Bạn có chắc muốn xóa danh mục này không?", "Xác nhận",
                     MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    if (dbDanhMuc.DeleteCategory(id))
+                    if (danhMucDB.DeleteCategory(id))
                     {
-                        MessageBox.Show("Xóa danh mục thành công");
-                        LoadListCategory();
-                        LoadCategoryIntoCombobox(cboDoanhMuc);
-                        ClearCategoryControls();
+                        MessageBox.Show("Đã xóa danh mục thành công");
+                        TaiDanhSachDanhMuc();
+                        TaiDanhMucVaoCombobox(cboDoanhMuc);
+                        XoaDuLieuDanhMuc();
                     }
                     else
                     {
-                        MessageBox.Show("Xóa danh mục thất bại");
+                        MessageBox.Show("Xóa danh mục không thành công");
                     }
                 }
             }
@@ -819,14 +820,11 @@ namespace DoAn.Net
                 MessageBox.Show("Lỗi khi xóa danh mục: " + ex.Message);
             }
         }
-        #endregion
-
-        #region events - Table
         private void btnThem2_Click(object sender, EventArgs e)
         {
-            isAddingTable = true;
-            ClearTableControls();
-            SetTableControlsEnabled(true);
+            dangThemBan = true;
+            XoaDuLieuBan();
+            TatBatDieuKhienBan(true);
             txtTenBan.Focus();
         }
 
@@ -834,12 +832,12 @@ namespace DoAn.Net
         {
             if (string.IsNullOrEmpty(txtIDTable.Text))
             {
-                MessageBox.Show("Vui lòng chọn bàn cần sửa");
+                MessageBox.Show("Chưa chọn bàn nào để sửa");
                 return;
             }
 
-            isAddingTable = false;
-            SetTableControlsEnabled(true);
+            dangThemBan = false;
+            TatBatDieuKhienBan(true);
             txtTenBan.Focus();
         }
 
@@ -847,69 +845,69 @@ namespace DoAn.Net
         {
             try
             {
-                if (isAddingTable)
+                if (dangThemBan)
                 {
-                    string name = txtTenBan.Text;
-                    string status = txtTrangThai.Text;
+                    string ten = txtTenBan.Text;
+                    string trangThai = txtTrangThai.Text;
 
-                    if (string.IsNullOrEmpty(name))
+                    if (string.IsNullOrEmpty(ten))
                     {
-                        MessageBox.Show("Vui lòng nhập tên bàn");
+                        MessageBox.Show("Chưa nhập tên bàn");
                         return;
                     }
 
-                    if (string.IsNullOrEmpty(status))
+                    if (string.IsNullOrEmpty(trangThai))
                     {
-                        MessageBox.Show("Vui lòng nhập trạng thái");
+                        MessageBox.Show("Chưa nhập trạng thái");
                         return;
                     }
 
-                    if (InsertTableToDatabase(name, status))
+                    if (ThemBanVaoCSDL(ten, trangThai))
                     {
-                        MessageBox.Show("Thêm bàn thành công");
-                        LoadListTable();
-                        SetTableControlsEnabled(false);
-                        isAddingTable = false;
-                        ClearTableControls();
+                        MessageBox.Show("Đã thêm bàn thành công");
+                        TaiDanhSachBan();
+                        TatBatDieuKhienBan(false);
+                        dangThemBan = false;
+                        XoaDuLieuBan();
                     }
                     else
                     {
-                        MessageBox.Show("Thêm bàn thất bại");
+                        MessageBox.Show("Thêm bàn không thành công");
                     }
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(txtIDTable.Text))
                     {
-                        MessageBox.Show("Vui lòng chọn bàn cần sửa");
+                        MessageBox.Show("Chưa chọn bàn nào để sửa");
                         return;
                     }
 
-                    string name = txtTenBan.Text;
-                    string status = txtTrangThai.Text;
+                    string ten = txtTenBan.Text;
+                    string trangThai = txtTrangThai.Text;
                     int id = Convert.ToInt32(txtIDTable.Text);
 
-                    if (string.IsNullOrEmpty(name))
+                    if (string.IsNullOrEmpty(ten))
                     {
-                        MessageBox.Show("Vui lòng nhập tên bàn");
+                        MessageBox.Show("Chưa nhập tên bàn");
                         return;
                     }
 
-                    if (string.IsNullOrEmpty(status))
+                    if (string.IsNullOrEmpty(trangThai))
                     {
-                        MessageBox.Show("Vui lòng nhập trạng thái");
+                        MessageBox.Show("Chưa nhập trạng thái");
                         return;
                     }
 
-                    if (UpdateTableInDatabase(id, name, status))
+                    if (SuaBanTrongCSDL(id, ten, trangThai))
                     {
-                        MessageBox.Show("Cập nhật bàn thành công");
-                        LoadListTable();
-                        SetTableControlsEnabled(false);
+                        MessageBox.Show("Đã cập nhật bàn thành công");
+                        TaiDanhSachBan();
+                        TatBatDieuKhienBan(false);
                     }
                     else
                     {
-                        MessageBox.Show("Cập nhật bàn thất bại");
+                        MessageBox.Show("Cập nhật bàn không thành công");
                     }
                 }
             }
@@ -925,22 +923,24 @@ namespace DoAn.Net
             {
                 if (string.IsNullOrEmpty(txtIDTable.Text))
                 {
-                    MessageBox.Show("Vui lòng chọn bàn cần xóa");
+                    MessageBox.Show("Chưa chọn bàn nào để xóa");
                     return;
                 }
+
                 int id = Convert.ToInt32(txtIDTable.Text);
-                if (MessageBox.Show("Bạn có chắc chắn muốn xóa bàn này?", "Xác nhận",
+
+                if (MessageBox.Show("Bạn có chắc muốn xóa bàn này không?", "Xác nhận",
                     MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    if (DeleteTableFromDatabase(id))
+                    if (XoaBanKhoiCSDL(id))
                     {
-                        MessageBox.Show("Xóa bàn thành công");
-                        LoadListTable();
-                        ClearTableControls();
+                        MessageBox.Show("Đã xóa bàn thành công");
+                        TaiDanhSachBan();
+                        XoaDuLieuBan();
                     }
                     else
                     {
-                        MessageBox.Show("Xóa bàn thất bại");
+                        MessageBox.Show("Xóa bàn không thành công");
                     }
                 }
             }
@@ -949,12 +949,9 @@ namespace DoAn.Net
                 MessageBox.Show("Lỗi khi xóa bàn: " + ex.Message);
             }
         }
-        #endregion
-
-        #region events - Bill
         private void btnThongKe_Click(object sender, EventArgs e)
         {
-            LoadListBillByDate(dtpBatDau.Value, dtpKetThuc.Value);
+            TaiHoaDonTheoNgay(dtpBatDau.Value, dtpKetThuc.Value);
         }
 
         private void btnFirstBillPage_Click(object sender, EventArgs e)
@@ -966,13 +963,13 @@ namespace DoAn.Net
         {
             try
             {
-                int sumRecord = dbHoaDon.GetNumBillListByDate(dtpBatDau.Value, dtpKetThuc.Value);
-                int lastPage = sumRecord / 10;
+                int tongSoHD = hoaDonDB.GetNumBillListByDate(dtpBatDau.Value, dtpKetThuc.Value);
+                int trangCuoi = tongSoHD / 10;
 
-                if (sumRecord % 10 != 0)
-                    lastPage++;
+                if (tongSoHD % 10 != 0)
+                    trangCuoi++;
 
-                txbPageBill.Text = lastPage.ToString();
+                txbPageBill.Text = trangCuoi.ToString();
             }
             catch (Exception ex)
             {
@@ -986,8 +983,8 @@ namespace DoAn.Net
             {
                 if (!string.IsNullOrEmpty(txbPageBill.Text))
                 {
-                    int page = Convert.ToInt32(txbPageBill.Text);
-                    dgvBill.DataSource = dbHoaDon.GetBillListByDateAndPage(dtpBatDau.Value, dtpKetThuc.Value, page);
+                    int trang = Convert.ToInt32(txbPageBill.Text);
+                    dgvBill.DataSource = hoaDonDB.GetBillListByDateAndPage(dtpBatDau.Value, dtpKetThuc.Value, trang);
                 }
             }
             catch (Exception ex)
@@ -1002,11 +999,11 @@ namespace DoAn.Net
             {
                 if (!string.IsNullOrEmpty(txbPageBill.Text))
                 {
-                    int page = Convert.ToInt32(txbPageBill.Text);
-                    if (page > 1)
-                        page--;
+                    int trang = Convert.ToInt32(txbPageBill.Text);
+                    if (trang > 1)
+                        trang--;
 
-                    txbPageBill.Text = page.ToString();
+                    txbPageBill.Text = trang.ToString();
                 }
             }
             catch (Exception ex)
@@ -1021,13 +1018,13 @@ namespace DoAn.Net
             {
                 if (!string.IsNullOrEmpty(txbPageBill.Text))
                 {
-                    int page = Convert.ToInt32(txbPageBill.Text);
-                    int sumRecord = dbHoaDon.GetNumBillListByDate(dtpBatDau.Value, dtpKetThuc.Value);
+                    int trang = Convert.ToInt32(txbPageBill.Text);
+                    int tongSoHD = hoaDonDB.GetNumBillListByDate(dtpBatDau.Value, dtpKetThuc.Value);
 
-                    if (page < sumRecord)
-                        page++;
+                    if (trang < tongSoHD)
+                        trang++;
 
-                    txbPageBill.Text = page.ToString();
+                    txbPageBill.Text = trang.ToString();
                 }
             }
             catch (Exception ex)
@@ -1035,62 +1032,62 @@ namespace DoAn.Net
                 MessageBox.Show("Lỗi khi chuyển trang: " + ex.Message);
             }
         }
-        #endregion
-
-        #region events - Report
         private void btnViewReport_Click(object sender, EventArgs e)
         {
-            LoadReportData(dtpFromReport.Value, dtpToReport.Value);
+            TaiDuLieuBaoCao(dtpFromReport.Value, dtpToReport.Value);
         }
 
         private void btnToday_Click(object sender, EventArgs e)
         {
-            DateTime today = DateTime.Now;
-            dtpFromReport.Value = today;
-            dtpToReport.Value = today;
-            LoadReportData(today, today);
+            DateTime homNay = DateTime.Now;
+            dtpFromReport.Value = homNay;
+            dtpToReport.Value = homNay;
+            TaiDuLieuBaoCao(homNay, homNay);
         }
 
         private void btnThisMonth_Click(object sender, EventArgs e)
         {
-            DateTime startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            DateTime endDate = DateTime.Now;
-            dtpFromReport.Value = startDate;
-            dtpToReport.Value = endDate;
-            LoadReportData(startDate, endDate);
+            DateTime ngayDauThang = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime homNay = DateTime.Now;
+            dtpFromReport.Value = ngayDauThang;
+            dtpToReport.Value = homNay;
+            TaiDuLieuBaoCao(ngayDauThang, homNay);
         }
 
         private void btnLastMonth_Click(object sender, EventArgs e)
         {
-            DateTime startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-1);
-            DateTime endDate = startDate.AddMonths(1).AddDays(-1);
-            dtpFromReport.Value = startDate;
-            dtpToReport.Value = endDate;
-            LoadReportData(startDate, endDate);
+            DateTime ngayDauThangTruoc = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-1);
+            DateTime ngayCuoiThangTruoc = ngayDauThangTruoc.AddMonths(1).AddDays(-1);
+            dtpFromReport.Value = ngayDauThangTruoc;
+            dtpToReport.Value = ngayCuoiThangTruoc;
+            TaiDuLieuBaoCao(ngayDauThangTruoc, ngayCuoiThangTruoc);
         }
 
         private void btnExportExcel_Click(object sender, EventArgs e)
         {
-            ExportToExcel(dtgvReport);
+            XuatExcel(dtgvReport);
         }
 
-        private void LoadReportData(DateTime fromDate, DateTime toDate)
+        private void TaiDuLieuBaoCao(DateTime tuNgay, DateTime denNgay)
         {
             try
             {
-                DataTable reportData = dbReport.GetBillReport(fromDate, toDate);
-                dtgvReport.DataSource = reportData;
-                decimal totalRevenue = 0;
-                int totalBills = reportData.Rows.Count;
+                DataTable duLieuBaoCao = baoCaoDB.GetBillReport(tuNgay, denNgay);
+                dtgvReport.DataSource = duLieuBaoCao;
 
-                foreach (DataRow row in reportData.Rows)
+                decimal tongDoanhThu = 0;
+                int tongHoaDon = duLieuBaoCao.Rows.Count;
+
+                foreach (DataRow dong in duLieuBaoCao.Rows)
                 {
-                    totalRevenue += Convert.ToDecimal(row["FinalPrice"]);
+                    tongDoanhThu += Convert.ToDecimal(dong["FinalPrice"]);
                 }
-                decimal averageBill = totalBills > 0 ? totalRevenue / totalBills : 0;
-                txtTotalBills.Text = $"{totalBills}";
-                txtTotalRevenue.Text = $"{totalRevenue:N0} VND";
-                txtAverageBill.Text = $"{averageBill:N0} VND";
+
+                decimal trungBinhHD = tongHoaDon > 0 ? tongDoanhThu / tongHoaDon : 0;
+
+                txtTotalBills.Text = $"{tongHoaDon}";
+                txtTotalRevenue.Text = $"{tongDoanhThu:N0} VND";
+                txtAverageBill.Text = $"{trungBinhHD:N0} VND";
             }
             catch (Exception ex)
             {
@@ -1098,46 +1095,43 @@ namespace DoAn.Net
             }
         }
 
-        private void ExportToExcel(DataGridView dataGrid)
+        private void XuatExcel(DataGridView bangDuLieu)
         {
-            SaveFileDialog saveFile = new SaveFileDialog();
-            saveFile.Filter = "Excel Files|*.xlsx";
-            saveFile.Title = "Lưu báo cáo";
+            SaveFileDialog luuFile = new SaveFileDialog();
+            luuFile.Filter = "Excel Files|*.xlsx";
+            luuFile.Title = "Lưu báo cáo";
 
-            if (saveFile.ShowDialog() == DialogResult.OK)
+            if (luuFile.ShowDialog() == DialogResult.OK)
             {
-                using (var writer = new System.IO.StreamWriter(saveFile.FileName, false, System.Text.Encoding.UTF8))
+                using (var ghi = new System.IO.StreamWriter(luuFile.FileName, false, System.Text.Encoding.UTF8))
                 {
-                    var headers = new List<string>();
-                    foreach (DataGridViewColumn col in dataGrid.Columns)
+                    var tieuDe = new List<string>();
+                    foreach (DataGridViewColumn cot in bangDuLieu.Columns)
                     {
-                        headers.Add(col.HeaderText);
+                        tieuDe.Add(cot.HeaderText);
                     }
-                    writer.WriteLine(string.Join(",", headers));
-                    foreach (DataGridViewRow row in dataGrid.Rows)
+                    ghi.WriteLine(string.Join(",", tieuDe));
+                    foreach (DataGridViewRow dong in bangDuLieu.Rows)
                     {
-                        if (!row.IsNewRow)
+                        if (!dong.IsNewRow)
                         {
-                            var cells = new List<string>();
-                            foreach (DataGridViewCell cell in row.Cells)
+                            var o = new List<string>();
+                            foreach (DataGridViewCell cell in dong.Cells)
                             {
-                                cells.Add(cell.Value?.ToString() ?? "");
+                                o.Add(cell.Value?.ToString() ?? "");
                             }
-                            writer.WriteLine(string.Join(",", cells));
+                            ghi.WriteLine(string.Join(",", o));
                         }
                     }
                 }
                 MessageBox.Show("Xuất báo cáo thành công!");
             }
         }
-        #endregion
-
-        #region events - Form and GridView
         private void fAdmin_Load(object sender, EventArgs e)
         {
             try
             {
-                LoadData();
+                TaiDuLieu();
             }
             catch (Exception ex)
             {
@@ -1150,23 +1144,24 @@ namespace DoAn.Net
         {
             try
             {
-                if (dgvThucAn.SelectedRows.Count > 0 && !isAddingFood)
+                if (dgvThucAn.SelectedRows.Count > 0 && !dangThemMon)
                 {
-                    DataGridViewRow selectedRow = dgvThucAn.SelectedRows[0];
-                    txtID.Text = selectedRow.Cells["ID"].Value?.ToString() ?? "";
-                    txtTenMon.Text = selectedRow.Cells["Name"].Value?.ToString() ?? "";
+                    DataGridViewRow dongDaChon = dgvThucAn.SelectedRows[0];
+                    txtID.Text = dongDaChon.Cells["ID"].Value?.ToString() ?? "";
+                    txtTenMon.Text = dongDaChon.Cells["Name"].Value?.ToString() ?? "";
 
-                    if (selectedRow.Cells["Price"].Value != null)
+                    if (dongDaChon.Cells["Price"].Value != null)
                     {
-                        nmGia.Value = Convert.ToDecimal(selectedRow.Cells["Price"].Value);
+                        nmGia.Value = Convert.ToDecimal(dongDaChon.Cells["Price"].Value);
                     }
 
-                    if (selectedRow.Cells["IdCategory"]?.Value != null)
+                    if (dongDaChon.Cells["IdCategory"]?.Value != null)
                     {
-                        int categoryID = (int)selectedRow.Cells["IdCategory"].Value;
-                        cboDoanhMuc.SelectedValue = categoryID;
+                        int maDanhMuc = (int)dongDaChon.Cells["IdCategory"].Value;
+                        cboDoanhMuc.SelectedValue = maDanhMuc;
                     }
-                    SetFoodControlsEnabled(false);
+
+                    TatBatDieuKhienMonAn(false);
                 }
             }
             catch (Exception ex)
@@ -1179,18 +1174,18 @@ namespace DoAn.Net
         {
             try
             {
-                if (dgvAccount.SelectedRows.Count > 0 && !isAddingAccount)
+                if (dgvAccount.SelectedRows.Count > 0 && !dangThemTaiKhoan)
                 {
-                    DataGridViewRow selectedRow = dgvAccount.SelectedRows[0];
-                    txtTenTK.Text = selectedRow.Cells["UserName"].Value?.ToString() ?? "";
-                    txtTenHienThi.Text = selectedRow.Cells["DisplayName"].Value?.ToString() ?? "";
+                    DataGridViewRow dongDaChon = dgvAccount.SelectedRows[0];
+                    txtTenTK.Text = dongDaChon.Cells["UserName"].Value?.ToString() ?? "";
+                    txtTenHienThi.Text = dongDaChon.Cells["DisplayName"].Value?.ToString() ?? "";
 
-                    if (selectedRow.Cells["Type"].Value != null)
+                    if (dongDaChon.Cells["Type"].Value != null)
                     {
-                        nmrLoai.Value = Convert.ToDecimal(selectedRow.Cells["Type"].Value);
+                        nmrLoai.Value = Convert.ToDecimal(dongDaChon.Cells["Type"].Value);
                     }
 
-                    SetAccountControlsEnabled(false);
+                    TatBatDieuKhienTaiKhoan(false);
                 }
             }
             catch (Exception ex)
@@ -1203,13 +1198,13 @@ namespace DoAn.Net
         {
             try
             {
-                if (dgvDoanhMuc.SelectedRows.Count > 0 && !isAddingCategory)
+                if (dgvDoanhMuc.SelectedRows.Count > 0 && !dangThemDanhMuc)
                 {
-                    DataGridViewRow selectedRow = dgvDoanhMuc.SelectedRows[0];
-                    txtMaDoanhMuc.Text = selectedRow.Cells["ID"].Value?.ToString() ?? "";
-                    txtTenDoanhMuc.Text = selectedRow.Cells["Name"].Value?.ToString() ?? "";
+                    DataGridViewRow dongDaChon = dgvDoanhMuc.SelectedRows[0];
+                    txtMaDoanhMuc.Text = dongDaChon.Cells["ID"].Value?.ToString() ?? "";
+                    txtTenDoanhMuc.Text = dongDaChon.Cells["Name"].Value?.ToString() ?? "";
 
-                    SetCategoryControlsEnabled(false);
+                    TatBatDieuKhienDanhMuc(false);
                 }
             }
             catch (Exception ex)
@@ -1222,13 +1217,14 @@ namespace DoAn.Net
         {
             try
             {
-                if (dgvBan.SelectedRows.Count > 0 && !isAddingTable)
+                if (dgvBan.SelectedRows.Count > 0 && !dangThemBan)
                 {
-                    DataGridViewRow selectedRow = dgvBan.SelectedRows[0];
-                    txtIDTable.Text = selectedRow.Cells["id"].Value?.ToString() ?? "";
-                    txtTenBan.Text = selectedRow.Cells["name"].Value?.ToString() ?? "";
-                    txtTrangThai.Text = selectedRow.Cells["status"].Value?.ToString() ?? "";
-                    SetTableControlsEnabled(false);
+                    DataGridViewRow dongDaChon = dgvBan.SelectedRows[0];
+                    txtIDTable.Text = dongDaChon.Cells["id"].Value?.ToString() ?? "";
+                    txtTenBan.Text = dongDaChon.Cells["name"].Value?.ToString() ?? "";
+                    txtTrangThai.Text = dongDaChon.Cells["status"].Value?.ToString() ?? "";
+
+                    TatBatDieuKhienBan(false);
                 }
             }
             catch (Exception ex)
@@ -1236,6 +1232,5 @@ namespace DoAn.Net
                 Console.WriteLine("Lỗi khi chọn dòng bàn: " + ex.Message);
             }
         }
-        #endregion
     }
 }
