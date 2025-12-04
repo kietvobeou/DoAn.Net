@@ -6,3 +6,10 @@
     {
     }
 }
+
+namespace DoAn.Net.QuanLyQuanCafeTableAdapters {
+    
+    
+    public partial class ReportTableAdapter {
+    }
+}

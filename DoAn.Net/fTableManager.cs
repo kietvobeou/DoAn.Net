@@ -44,7 +44,6 @@ namespace DoAn.Net
         {
             flpTable.Controls.Clear();
 
-
             List<Ban> listBan = dbBan.LoadTableList();
 
             foreach (Ban ban in listBan)
@@ -68,9 +67,15 @@ namespace DoAn.Net
 
                 flpTable.Controls.Add(btn);
             }
+
+            // Load danh sách bàn cho cả 2 ComboBox
             cbSwitchTable.DataSource = listBan;
             cbSwitchTable.DisplayMember = "Name";
             cbSwitchTable.ValueMember = "ID";
+
+            cbSwitchTableTo.DataSource = new List<Ban>(listBan); // Tạo bản sao để tránh conflict
+            cbSwitchTableTo.DisplayMember = "Name";
+            cbSwitchTableTo.ValueMember = "ID";
         }
 
         void LoadDanhMuc()
@@ -96,12 +101,10 @@ namespace DoAn.Net
 
             foreach (DataRow row in data.Rows)
             {
-
                 string tenMon = row["FoodName"].ToString();
                 int soLuong = (int)row["Count"];
                 float donGia = Convert.ToSingle(row["Price"]);
                 float thanhTien = Convert.ToSingle(row["TotalPrice"]);
-
 
                 ListViewItem item = new ListViewItem(tenMon);
                 item.SubItems.Add(soLuong.ToString());
@@ -188,15 +191,48 @@ namespace DoAn.Net
 
         private void btnSwitchTable_Click(object sender, EventArgs e)
         {
-            if (cbSwitchTable.SelectedValue == null) return;
-
-            int idBanMuonXem = (int)cbSwitchTable.SelectedValue;
-            Ban banMoi = dbBan.GetTableByID(idBanMuonXem);
-            if (banMoi != null)
+            if (cbSwitchTable.SelectedValue == null || cbSwitchTableTo.SelectedValue == null)
             {
-                banHienTai = banMoi;
-                ShowHoaDon(banHienTai.ID);
-                MessageBox.Show("Đang xem " + banHienTai.Name);
+                MessageBox.Show("Vui lòng chọn cả bàn nguồn và bàn đích!");
+                return;
+            }
+
+            int idBanNguon = (int)cbSwitchTable.SelectedValue;
+            int idBanDich = (int)cbSwitchTableTo.SelectedValue;
+            if (idBanNguon == idBanDich)
+            {
+                MessageBox.Show("Không thể chuyển cùng một bàn!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            int idBill = dbHoaDon.GetUncheckBillIDByTableID(idBanNguon);
+            if (idBill == -1)
+            {
+                MessageBox.Show("Bàn nguồn không có hóa đơn chưa thanh toán!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            Ban banDich = dbBan.GetTableByID(idBanDich);
+            if (banDich.Status != "Trống")
+            {
+                MessageBox.Show("Bàn đích không trống! Vui lòng chọn bàn khác.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            string thongBao = string.Format("Bạn có chắc chắn muốn chuyển hóa đơn từ bàn {0} sang bàn {1}?",
+                (cbSwitchTable.SelectedItem as Ban).Name,
+                (cbSwitchTableTo.SelectedItem as Ban).Name);
+
+            if (MessageBox.Show(thongBao, "Xác nhận chuyển bàn", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                dbHoaDon.SwitchTable(idBill, idBanDich);
+                dbBan.UpdateTableStatus(idBanNguon, "Trống");
+                dbBan.UpdateTableStatus(idBanDich, "Có người");
+                LoadDanhSachBan();
+                if (banHienTai != null && banHienTai.ID == idBanNguon)
+                {
+                    banHienTai = banDich;
+                    ShowHoaDon(banHienTai.ID);
+                }
+
+                MessageBox.Show("Chuyển bàn thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -229,15 +265,26 @@ namespace DoAn.Net
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
+                fLogin loginForm = new fLogin();
+                loginForm.Show();
                 this.Close();
             }
         }
+
         private void fTableManager_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Bạn có chắc muốn đăng xuất?", "Xác nhận",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            if (e.CloseReason == CloseReason.UserClosing)
             {
-                e.Cancel = true;
+                if (MessageBox.Show("Bạn có chắc muốn đăng xuất?", "Xác nhận",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                {
+                    e.Cancel = true;
+                }
+                else
+                {
+                    fLogin loginForm = new fLogin();
+                    loginForm.Show();
+                }
             }
         }
     }

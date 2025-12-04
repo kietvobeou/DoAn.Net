@@ -57,6 +57,7 @@
             this.panelHeader = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.cbSwitchTableTo = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.nmFoodCount)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmDisCount)).BeginInit();
@@ -166,7 +167,7 @@
             this.cbSwitchTable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSwitchTable.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbSwitchTable.FormattingEnabled = true;
-            this.cbSwitchTable.Location = new System.Drawing.Point(5, 68);
+            this.cbSwitchTable.Location = new System.Drawing.Point(5, 44);
             this.cbSwitchTable.Margin = new System.Windows.Forms.Padding(4);
             this.cbSwitchTable.Name = "cbSwitchTable";
             this.cbSwitchTable.Size = new System.Drawing.Size(178, 31);
@@ -182,7 +183,7 @@
             this.btnSwitchTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSwitchTable.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSwitchTable.ForeColor = System.Drawing.Color.White;
-            this.btnSwitchTable.Location = new System.Drawing.Point(5, 20);
+            this.btnSwitchTable.Location = new System.Drawing.Point(5, 4);
             this.btnSwitchTable.Margin = new System.Windows.Forms.Padding(4);
             this.btnSwitchTable.Name = "btnSwitchTable";
             this.btnSwitchTable.Size = new System.Drawing.Size(178, 32);
@@ -225,6 +226,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Transparent;
+            this.panel3.Controls.Add(this.cbSwitchTableTo);
             this.panel3.Controls.Add(this.lblGiamgia);
             this.panel3.Controls.Add(this.lblTotal);
             this.panel3.Controls.Add(this.txbTotalPrice);
@@ -407,6 +409,18 @@
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "QUẢN LÝ BÀN VÀ ĐẶT MÓN";
             // 
+            // cbSwitchTableTo
+            // 
+            this.cbSwitchTableTo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(248)))), ((int)(((byte)(237)))));
+            this.cbSwitchTableTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSwitchTableTo.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbSwitchTableTo.FormattingEnabled = true;
+            this.cbSwitchTableTo.Location = new System.Drawing.Point(5, 83);
+            this.cbSwitchTableTo.Margin = new System.Windows.Forms.Padding(4);
+            this.cbSwitchTableTo.Name = "cbSwitchTableTo";
+            this.cbSwitchTableTo.Size = new System.Drawing.Size(178, 31);
+            this.cbSwitchTableTo.TabIndex = 10;
+            // 
             // fTableManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -469,5 +483,6 @@
         private System.Windows.Forms.Panel panelHeader;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.ComboBox cbSwitchTableTo;
     }
 }

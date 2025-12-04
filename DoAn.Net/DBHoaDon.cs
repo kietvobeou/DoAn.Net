@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DoAn.Net
 {
@@ -17,61 +18,6 @@ namespace DoAn.Net
         {
             daBill = new HoaDonTableAdapter();
         }
-
-        // --- Lấy danh sách món ăn theo bàn ---
-        //public List<Menu> GetListMenuByTable(int idTable)
-        //{
-        //    List<Menu> listMenu = new List<Menu>();
-
-        //    // Lấy chuỗi kết nối từ Project Settings
-        //    string connectionString = Properties.Settings.Default.QuanLyQuanCafeConnectionString;
-
-        //    // Câu lệnh SQL gọi Stored Procedure: USP_GetListMenuByTable
-        //    // Query này nối 3 bảng: ChiTietHoaDon, HoaDon, MonAn
-        //    string query = "EXEC USP_GetListMenuByTable @idTable";
-
-        //    try
-        //    {
-        //        using (SqlConnection connection = new SqlConnection(connectionString))
-        //        {
-        //            connection.Open();
-        //            SqlCommand command = new SqlCommand(query, connection);
-        //            command.Parameters.AddWithValue("@idTable", idTable);
-
-        //            SqlDataAdapter adapter = new SqlDataAdapter(command);
-        //            DataTable data = new DataTable();
-        //            adapter.Fill(data);
-
-        //            foreach (DataRow item in data.Rows)
-        //            {
-        //                Menu menu = new Menu(item);
-        //                listMenu.Add(menu);
-        //            }
-        //        }
-        //    }
-        //    catch { }
-
-        //    return listMenu;
-        //}
-
-        //public DataTable GetListMenuByTable(int idTable)
-        //{
-        //    string connectionString = Properties.Settings.Default.QuanLyQuanCafeConnectionString;
-        //    string query = "EXEC USP_GetListMenuByTable @idTable";
-
-        //    using (SqlConnection connection = new SqlConnection(connectionString))
-        //    {
-        //        connection.Open();
-        //        SqlCommand command = new SqlCommand(query, connection);
-        //        command.Parameters.AddWithValue("@idTable", idTable);
-
-        //        SqlDataAdapter adapter = new SqlDataAdapter(command);
-        //        DataTable data = new DataTable();
-        //        adapter.Fill(data);
-
-        //        return data; // Trả về DataTable
-        //    }
-        //}
         public DataTable GetListMenuByTable(int idTable)
         {
             DataTable data = new DataTable();
@@ -94,6 +40,20 @@ namespace DoAn.Net
                 
             }      
             return data;
+        }
+
+        public bool SwitchTable(int idBill, int idTableDich)
+        {
+            try
+            {
+                int rowsAffected = daBill.UpdateBill(idTableDich, idBill);
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi chuyển bàn: " + ex.Message);
+                return false;
+            }
         }
 
 
