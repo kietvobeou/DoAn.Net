@@ -43,10 +43,20 @@ namespace DoAn.Net
             if (Login(userName, passWord))
             {
                 TaiKhoan loginAccount = dbTaiKhoan.GetAccountByUserName(userName);
-                fTableManager f = new fTableManager(loginAccount);
-                this.Hide();
-                f.ShowDialog();
-                this.Close();
+                if (loginAccount.Type == 1) 
+                {
+                    fTableManager f = new fTableManager(loginAccount);
+                    this.Hide();
+                    f.ShowDialog();
+                    this.Close();
+                }
+                else 
+                {
+                    fTableManager f = new fTableManager(loginAccount);
+                    this.Hide();
+                    f.ShowDialog();
+                    this.Close();
+                }
             }
             else
             {

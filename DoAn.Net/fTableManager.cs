@@ -1,7 +1,8 @@
-﻿using System;
+﻿using DoAn.Net.QuanLyQuanCafeTableAdapters;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing; 
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace DoAn.Net
@@ -25,20 +26,25 @@ namespace DoAn.Net
             if (acc.Type == 1)
             {
                 adminToolStripMenuItem.Enabled = true;
+                adminToolStripMenuItem.Visible = true;
             }
             else
             {
                 adminToolStripMenuItem.Enabled = false;
+                adminToolStripMenuItem.Visible = false;
             }
-            thongTinTKToolStripMenuItem.Text = "Thông tin: " + acc.DisplayName;
+
+            thongTinTKToolStripMenuItem.Text = "Thông tin: " + acc.DisplayName + " (" + (acc.Type == 1 ? "Quản lý" : "Nhân viên") + ")";
             LoadDanhSachBan();
             LoadDanhMuc();
+            this.FormClosing += fTableManager_FormClosing;
         }
+
         void LoadDanhSachBan()
         {
             flpTable.Controls.Clear();
 
-           
+
             List<Ban> listBan = dbBan.LoadTableList();
 
             foreach (Ban ban in listBan)
@@ -80,6 +86,7 @@ namespace DoAn.Net
             cbFood.DisplayMember = "Name";
             cbFood.ValueMember = "ID";
         }
+
         void ShowHoaDon(int idBan)
         {
             lsvBill.Items.Clear();
@@ -89,13 +96,13 @@ namespace DoAn.Net
 
             foreach (DataRow row in data.Rows)
             {
-               
+
                 string tenMon = row["FoodName"].ToString();
                 int soLuong = (int)row["Count"];
                 float donGia = Convert.ToSingle(row["Price"]);
                 float thanhTien = Convert.ToSingle(row["TotalPrice"]);
 
-               
+
                 ListViewItem item = new ListViewItem(tenMon);
                 item.SubItems.Add(soLuong.ToString());
                 item.SubItems.Add(donGia.ToString("N0"));
@@ -106,6 +113,7 @@ namespace DoAn.Net
             }
             txbTotalPrice.Text = tongTien.ToString("N0") + " VNĐ";
         }
+
         private void Btn_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
@@ -139,7 +147,7 @@ namespace DoAn.Net
             int idFood = (int)cbFood.SelectedValue;
             int count = (int)nmFoodCount.Value;
 
-            if (idBill == -1) 
+            if (idBill == -1)
             {
                 dbHoaDon.InsertBill(banHienTai.ID);
                 dbBan.UpdateTableStatus(banHienTai.ID, "Có người");
@@ -147,7 +155,7 @@ namespace DoAn.Net
                 int maxBillID = dbHoaDon.GetMaxIDBill();
                 dbChiTiet.InsertBillInfo(maxBillID, idFood, count);
             }
-            else 
+            else
             {
                 dbChiTiet.InsertBillInfo(idBill, idFood, count);
             }
@@ -162,7 +170,7 @@ namespace DoAn.Net
 
             int idBill = dbHoaDon.GetUncheckBillIDByTableID(banHienTai.ID);
 
-            if (idBill != -1) 
+            if (idBill != -1)
             {
                 int giamGia = (int)nmDisCount.Value;
                 float tienCuoiCung = tongTien - (tongTien / 100 * giamGia);
@@ -178,25 +186,28 @@ namespace DoAn.Net
             }
         }
 
-      
-        
         private void btnSwitchTable_Click(object sender, EventArgs e)
         {
-           
             if (cbSwitchTable.SelectedValue == null) return;
-     
+
             int idBanMuonXem = (int)cbSwitchTable.SelectedValue;
-            Ban banMoi = dbBan.GetTableByID(idBanMuonXem); 
+            Ban banMoi = dbBan.GetTableByID(idBanMuonXem);
             if (banMoi != null)
             {
                 banHienTai = banMoi;
-                ShowHoaDon(banHienTai.ID);            
-                MessageBox.Show("Đang xem " + banHienTai.Name); 
+                ShowHoaDon(banHienTai.ID);
+                MessageBox.Show("Đang xem " + banHienTai.Name);
             }
         }
 
         private void adminToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (LoginAccount.Type != 1)
+            {
+                MessageBox.Show("Bạn không có quyền truy cập tính năng này!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             fAdmin f = new fAdmin();
             f.taiKhoanDangNhap = LoginAccount;
             f.ShowDialog();
@@ -209,12 +220,25 @@ namespace DoAn.Net
             fAccountProfile f = new fAccountProfile();
             f.LoginAccount = LoginAccount;
             f.ShowDialog();
-            thongTinTKToolStripMenuItem.Text = "Thông tin: " + LoginAccount.DisplayName;
+            thongTinTKToolStripMenuItem.Text = "Thông tin: " + LoginAccount.DisplayName + " (" + (LoginAccount.Type == 1 ? "Quản lý" : "Nhân viên") + ")";
         }
 
         private void dangXuatToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult result = MessageBox.Show("Bạn có chắc muốn đăng xuất?", "Xác nhận",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
+        private void fTableManager_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Bạn có chắc muốn đăng xuất?", "Xác nhận",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
