@@ -60,6 +60,9 @@
     <Compile Include="HoaDon.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="MonAn.cs" />
+    <Compile Include="QuanLyQuanCafe.cs">
+      <DependentUpon>QuanLyQuanCafe.xsd</DependentUpon>
+    </Compile>
     <Compile Include="TaiKhoan.cs" />
     <Compile Include="fAccountProfile.cs">
       <SubType>Form</SubType>

@@ -19,40 +19,83 @@ namespace DoAn.Net
         }
 
         // --- Lấy danh sách món ăn theo bàn ---
-        public List<Menu> GetListMenuByTable(int idTable)
+        //public List<Menu> GetListMenuByTable(int idTable)
+        //{
+        //    List<Menu> listMenu = new List<Menu>();
+
+        //    // Lấy chuỗi kết nối từ Project Settings
+        //    string connectionString = Properties.Settings.Default.QuanLyQuanCafeConnectionString;
+
+        //    // Câu lệnh SQL gọi Stored Procedure: USP_GetListMenuByTable
+        //    // Query này nối 3 bảng: ChiTietHoaDon, HoaDon, MonAn
+        //    string query = "EXEC USP_GetListMenuByTable @idTable";
+
+        //    try
+        //    {
+        //        using (SqlConnection connection = new SqlConnection(connectionString))
+        //        {
+        //            connection.Open();
+        //            SqlCommand command = new SqlCommand(query, connection);
+        //            command.Parameters.AddWithValue("@idTable", idTable);
+
+        //            SqlDataAdapter adapter = new SqlDataAdapter(command);
+        //            DataTable data = new DataTable();
+        //            adapter.Fill(data);
+
+        //            foreach (DataRow item in data.Rows)
+        //            {
+        //                Menu menu = new Menu(item);
+        //                listMenu.Add(menu);
+        //            }
+        //        }
+        //    }
+        //    catch { }
+
+        //    return listMenu;
+        //}
+
+        //public DataTable GetListMenuByTable(int idTable)
+        //{
+        //    string connectionString = Properties.Settings.Default.QuanLyQuanCafeConnectionString;
+        //    string query = "EXEC USP_GetListMenuByTable @idTable";
+
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        connection.Open();
+        //        SqlCommand command = new SqlCommand(query, connection);
+        //        command.Parameters.AddWithValue("@idTable", idTable);
+
+        //        SqlDataAdapter adapter = new SqlDataAdapter(command);
+        //        DataTable data = new DataTable();
+        //        adapter.Fill(data);
+
+        //        return data; // Trả về DataTable
+        //    }
+        //}
+        public DataTable GetListMenuByTable(int idTable)
         {
-            List<Menu> listMenu = new List<Menu>();
-
-            // Lấy chuỗi kết nối từ Project Settings
-            string connectionString = Properties.Settings.Default.QuanLyQuanCafeConnectionString;
-
-            // Câu lệnh SQL gọi Stored Procedure: USP_GetListMenuByTable
-            // Query này nối 3 bảng: ChiTietHoaDon, HoaDon, MonAn
-            string query = "EXEC USP_GetListMenuByTable @idTable";
+            DataTable data = new DataTable();
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@idTable", idTable);
+                string connectionString = Properties.Settings.Default.QuanLyQuanCafeConnectionString;
+                SqlConnection connection = new SqlConnection(connectionString);
+                string query = "EXEC USP_GetListMenuByTable @idTable";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@idTable", idTable);
+                connection.Open();
 
-                    SqlDataAdapter adapter = new SqlDataAdapter(command);
-                    DataTable data = new DataTable();
-                    adapter.Fill(data);
-
-                    foreach (DataRow item in data.Rows)
-                    {
-                        Menu menu = new Menu(item);
-                        listMenu.Add(menu);
-                    }
-                }
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                adapter.Fill(data);
+                connection.Close();
             }
-            catch { }
-
-            return listMenu;
+            catch
+            {
+                
+            }      
+            return data;
         }
+
 
         public DataTable GetBillListByDate(DateTime checkIn, DateTime checkOut)
         {
