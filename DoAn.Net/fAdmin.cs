@@ -23,11 +23,11 @@ namespace DoAn.Net
         private DBHoaDon hoaDonDB = new DBHoaDon();
         private DBReport baoCaoDB = new DBReport();
         private DBBan banDB = new DBBan();
-        public TaiKhoan taiKhoanDangNhap;
         private bool dangThemMon = false;
         private bool dangThemTaiKhoan = false;
         private bool dangThemDanhMuc = false;
         private bool dangThemBan = false;
+        public TaiKhoan taiKhoanDangNhap { get; set; }
 
         public fAdmin()
         {
@@ -626,15 +626,20 @@ namespace DoAn.Net
                 }
 
                 string tenDangNhap = txtTenTK.Text;
-
-                if (taiKhoanDangNhap.UserName.Equals(tenDangNhap))
+                if (tenDangNhap == "admin")
                 {
-                    MessageBox.Show("Không thể xóa tài khoản đang đăng nhập");
+                    MessageBox.Show("Không thể xóa tài khoản admin mặc định!");
+                    return;
+                }
+                if (taiKhoanDangNhap != null && taiKhoanDangNhap.UserName == tenDangNhap)
+                {
+                    MessageBox.Show("Không thể xóa tài khoản đang đăng nhập!");
                     return;
                 }
 
-                if (MessageBox.Show("Bạn có chắc muốn xóa tài khoản này không?", "Xác nhận",
-                    MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show($"Bạn có chắc muốn xóa tài khoản '{tenDangNhap}'?",
+                                   "Xác nhận",
+                                   MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     if (taiKhoanDB.XoaTK(tenDangNhap))
                     {
@@ -650,7 +655,7 @@ namespace DoAn.Net
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi xóa tài khoản: " + ex.Message);
+                MessageBox.Show($"Lỗi khi xóa tài khoản: {ex.Message}");
             }
         }
 
@@ -1131,6 +1136,11 @@ namespace DoAn.Net
         {
             try
             {
+                if (taiKhoanDangNhap != null)
+                {
+                    MessageBox.Show("Xin Chào");
+                }
+
                 TaiDuLieu();
             }
             catch (Exception ex)

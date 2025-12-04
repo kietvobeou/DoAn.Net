@@ -17,6 +17,8 @@ namespace DoAn.Net
             this.Password = password;
         }
 
+        public TaiKhoan() { }
+
         public TaiKhoan(DataRow row)
         {
             this.UserName = row["userName"].ToString();

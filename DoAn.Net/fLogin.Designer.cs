@@ -48,8 +48,8 @@
             this.panel1.Controls.Add(this.btnLogin);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Location = new System.Drawing.Point(13, 13);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Location = new System.Drawing.Point(13, 14);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(533, 167);
             this.panel1.TabIndex = 1;
@@ -58,7 +58,7 @@
             // 
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnExit.Location = new System.Drawing.Point(425, 127);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 28);
             this.btnExit.TabIndex = 3;
@@ -68,7 +68,7 @@
             // btnLogin
             // 
             this.btnLogin.Location = new System.Drawing.Point(317, 127);
-            this.btnLogin.Margin = new System.Windows.Forms.Padding(4);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(100, 28);
             this.btnLogin.TabIndex = 2;
@@ -80,7 +80,7 @@
             this.panel3.Controls.Add(this.txtPassWord);
             this.panel3.Controls.Add(this.lblPassword);
             this.panel3.Location = new System.Drawing.Point(4, 65);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(525, 54);
             this.panel3.TabIndex = 1;
@@ -88,11 +88,10 @@
             // txtPassWord
             // 
             this.txtPassWord.Location = new System.Drawing.Point(185, 12);
-            this.txtPassWord.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPassWord.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPassWord.Name = "txtPassWord";
             this.txtPassWord.Size = new System.Drawing.Size(335, 22);
             this.txtPassWord.TabIndex = 1;
-            this.txtPassWord.Text = "123";
             this.txtPassWord.UseSystemPasswordChar = true;
             // 
             // lblPassword
@@ -111,7 +110,7 @@
             this.panel2.Controls.Add(this.txtUserName);
             this.panel2.Controls.Add(this.lblUserName);
             this.panel2.Location = new System.Drawing.Point(4, 4);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(525, 54);
             this.panel2.TabIndex = 0;
@@ -119,11 +118,11 @@
             // txtUserName
             // 
             this.txtUserName.Location = new System.Drawing.Point(185, 12);
-            this.txtUserName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtUserName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(335, 22);
             this.txtUserName.TabIndex = 1;
-            this.txtUserName.Text = "username";
+            this.txtUserName.Text = "\r\n";
             // 
             // lblUserName
             // 
@@ -142,6 +141,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(551, 183);
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "fLogin";
             this.Text = "fLogin";
             this.panel1.ResumeLayout(false);

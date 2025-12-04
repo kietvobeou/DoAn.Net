@@ -93,7 +93,7 @@ namespace DoAn.Net
 
                 if (account != null)
                 {
-                    daTaiKhoan.UpdateQuery(account.DisplayName,account.Type,account.UserName);
+                    daTaiKhoan.UpdateQuery(displayName, type, userName);
                     return true;
                 }
                 return false;
@@ -103,7 +103,6 @@ namespace DoAn.Net
                 return false;
             }
         }
-
         public bool XoaTK(string userName)
         {
             try
@@ -134,11 +133,46 @@ namespace DoAn.Net
 
                 if (account != null)
                 {
-                    account.PassWord = "123456";
+                    account.PassWord = "0";
                     daTaiKhoan.Update(account);
                     return true;
                 }
                 return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public TaiKhoan GetAccountByID(string userName)
+        {
+            try
+            {
+                var data = daTaiKhoan.GetData();
+                var row = data.FirstOrDefault(acc => acc.UserName == userName);
+
+                if (row != null)
+                {
+                    return new TaiKhoan()
+                    {
+                        UserName = row.UserName,
+                        DisplayName = row.DisplayName,
+                        Type = row.Type
+                    };
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public bool IsAccountExists(string userName)
+        {
+            try
+            {
+                var data = daTaiKhoan.GetData();
+                return data.Any(acc => acc.UserName == userName);
             }
             catch
             {

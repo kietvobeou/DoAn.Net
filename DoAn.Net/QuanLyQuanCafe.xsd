@@ -493,7 +493,7 @@ SELECT id, DateCheckIn, DateCheckOut, idTable, status, discount, totalPrice FROM
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetListMenuByTable" GetMethodModifier="Public" GetMethodName="GetListMenuByTable" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetListMenuByTable" UserSourceName="GetListMenuByTable">
+              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetListMenuByTable" GetMethodModifier="Public" GetMethodName="GetListMenuByTable" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetListMenuByTable" UserSourceName="GetListMenuByTable">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT f.name AS FoodName, bi.count AS Count, f.price AS Price, f.price * bi.count AS TotalPrice
@@ -507,7 +507,7 @@ WHERE  (b.status = 0) AND (b.idTable = @tableID)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GetMaxBillID" Modifier="Public" Name="GetMaxBillID" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="GetMaxBillID">
+              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GetMaxBillID" Modifier="Public" Name="GetMaxBillID" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="GetMaxBillID">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>  SELECT MAX(id) FROM HoaDon</CommandText>
@@ -610,7 +610,7 @@ SELECT id, name, idCategory, price FROM MonAn WHERE (id = @id)</CommandText>
               <Mapping SourceColumn="price" DataSetColumn="price" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="CountFoodByCategory" Modifier="Public" Name="CountFoodByCategory" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="CountFoodByCategory">
+              <DbSource ConnectionRef="QuanLyQuanCafeConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="CountFoodByCategory" Modifier="Public" Name="CountFoodByCategory" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="CountFoodByCategory">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT COUNT(*) 
@@ -873,10 +873,10 @@ WHERE idCategory = @categoryID</CommandText>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK__ChiTietHo__idBil__5EBF139D" msdata:parent="HoaDon" msdata:child="ChiTietHoaDon" msdata:parentkey="id" msdata:childkey="idBill" msprop:Generator_UserParentTable="HoaDon" msprop:Generator_UserChildTable="ChiTietHoaDon" msprop:Generator_RelationVarName="relationFK__ChiTietHo__idBil__5EBF139D" msprop:Generator_ChildPropName="GetChiTietHoaDonRows" msprop:Generator_ParentPropName="HoaDonRow" msprop:Generator_UserRelationName="FK__ChiTietHo__idBil__5EBF139D" />
-      <msdata:Relationship name="FK__ChiTietHo__idFoo__5FB337D6" msdata:parent="MonAn" msdata:child="ChiTietHoaDon" msdata:parentkey="id" msdata:childkey="idFood" msprop:Generator_UserParentTable="MonAn" msprop:Generator_UserChildTable="ChiTietHoaDon" msprop:Generator_RelationVarName="relationFK__ChiTietHo__idFoo__5FB337D6" msprop:Generator_ChildPropName="GetChiTietHoaDonRows" msprop:Generator_ParentPropName="MonAnRow" msprop:Generator_UserRelationName="FK__ChiTietHo__idFoo__5FB337D6" />
-      <msdata:Relationship name="FK__HoaDon__idTable__5AEE82B9" msdata:parent="Ban" msdata:child="HoaDon" msdata:parentkey="id" msdata:childkey="idTable" msprop:Generator_UserParentTable="Ban" msprop:Generator_UserChildTable="HoaDon" msprop:Generator_RelationVarName="relationFK__HoaDon__idTable__5AEE82B9" msprop:Generator_ChildPropName="GetHoaDonRows" msprop:Generator_UserRelationName="FK__HoaDon__idTable__5AEE82B9" msprop:Generator_ParentPropName="BanRow" />
-      <msdata:Relationship name="FK__MonAn__idCategor__52593CB8" msdata:parent="DanhMuc" msdata:child="MonAn" msdata:parentkey="id" msdata:childkey="idCategory" msprop:Generator_UserParentTable="DanhMuc" msprop:Generator_UserChildTable="MonAn" msprop:Generator_RelationVarName="relationFK__MonAn__idCategor__52593CB8" msprop:Generator_ChildPropName="GetMonAnRows" msprop:Generator_UserRelationName="FK__MonAn__idCategor__52593CB8" msprop:Generator_ParentPropName="DanhMucRow" />
+      <msdata:Relationship name="FK__ChiTietHo__idBil__5EBF139D" msdata:parent="HoaDon" msdata:child="ChiTietHoaDon" msdata:parentkey="id" msdata:childkey="idBill" msprop:Generator_UserParentTable="HoaDon" msprop:Generator_UserChildTable="ChiTietHoaDon" msprop:Generator_RelationVarName="relationFK__ChiTietHo__idBil__5EBF139D" msprop:Generator_ChildPropName="GetChiTietHoaDonRows" msprop:Generator_UserRelationName="FK__ChiTietHo__idBil__5EBF139D" msprop:Generator_ParentPropName="HoaDonRow" />
+      <msdata:Relationship name="FK__ChiTietHo__idFoo__5FB337D6" msdata:parent="MonAn" msdata:child="ChiTietHoaDon" msdata:parentkey="id" msdata:childkey="idFood" msprop:Generator_UserParentTable="MonAn" msprop:Generator_UserChildTable="ChiTietHoaDon" msprop:Generator_RelationVarName="relationFK__ChiTietHo__idFoo__5FB337D6" msprop:Generator_ChildPropName="GetChiTietHoaDonRows" msprop:Generator_UserRelationName="FK__ChiTietHo__idFoo__5FB337D6" msprop:Generator_ParentPropName="MonAnRow" />
+      <msdata:Relationship name="FK__HoaDon__idTable__5AEE82B9" msdata:parent="Ban" msdata:child="HoaDon" msdata:parentkey="id" msdata:childkey="idTable" msprop:Generator_UserParentTable="Ban" msprop:Generator_UserChildTable="HoaDon" msprop:Generator_RelationVarName="relationFK__HoaDon__idTable__5AEE82B9" msprop:Generator_ChildPropName="GetHoaDonRows" msprop:Generator_ParentPropName="BanRow" msprop:Generator_UserRelationName="FK__HoaDon__idTable__5AEE82B9" />
+      <msdata:Relationship name="FK__MonAn__idCategor__52593CB8" msdata:parent="DanhMuc" msdata:child="MonAn" msdata:parentkey="id" msdata:childkey="idCategory" msprop:Generator_UserParentTable="DanhMuc" msprop:Generator_UserChildTable="MonAn" msprop:Generator_RelationVarName="relationFK__MonAn__idCategor__52593CB8" msprop:Generator_ChildPropName="GetMonAnRows" msprop:Generator_ParentPropName="DanhMucRow" msprop:Generator_UserRelationName="FK__MonAn__idCategor__52593CB8" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

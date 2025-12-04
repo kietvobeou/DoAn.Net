@@ -40,17 +40,13 @@ namespace DoAn.Net
             string userName = txtUserName.Text.Trim();
             string passWord = txtPassWord.Text.Trim();
 
-            DBTaiKhoan dbTaiKhoan = new DBTaiKhoan();
-
             if (Login(userName, passWord))
             {
                 TaiKhoan loginAccount = dbTaiKhoan.GetAccountByUserName(userName);
-
                 fTableManager f = new fTableManager(loginAccount);
-
                 this.Hide();
                 f.ShowDialog();
-                this.Show();
+                this.Close();
             }
             else
             {
