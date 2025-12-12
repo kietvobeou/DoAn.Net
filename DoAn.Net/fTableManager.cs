@@ -16,6 +16,7 @@ namespace DoAn.Net
         DBChiTietHoaDon dbChiTiet = new DBChiTietHoaDon();
         Ban banHienTai = null;
         float tongTien = 0;
+        private bool isLoggingOut = false; // Cờ kiểm tra đang đăng xuất
 
         public TaiKhoan LoginAccount;
 
@@ -247,8 +248,11 @@ namespace DoAn.Net
             fAdmin f = new fAdmin();
             f.taiKhoanDangNhap = LoginAccount;
             f.ShowDialog();
+
+            LoadDanhSachBan();
             LoadDanhMuc();
-            if (banHienTai != null) ShowHoaDon(banHienTai.ID);
+            if (banHienTai != null)
+                ShowHoaDon(banHienTai.ID);
         }
 
         private void thongTinCaNhanToolStripMenuItem_Click(object sender, EventArgs e)
@@ -261,29 +265,43 @@ namespace DoAn.Net
 
         private void dangXuatToolStripMenuItem_Click(object sender, EventArgs e)
         {
+           
             DialogResult result = MessageBox.Show("Bạn có chắc muốn đăng xuất?", "Xác nhận",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
             if (result == DialogResult.Yes)
             {
+               
+                isLoggingOut = true;
                 fLogin loginForm = new fLogin();
+                this.Close(); 
                 loginForm.Show();
-                this.Close();
             }
         }
 
         private void fTableManager_FormClosing(object sender, FormClosingEventArgs e)
         {
+            
+            if (isLoggingOut)
+            {
+                return;
+            }
+
+           
             if (e.CloseReason == CloseReason.UserClosing)
             {
-                if (MessageBox.Show("Bạn có chắc muốn đăng xuất?", "Xác nhận",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                DialogResult result = MessageBox.Show("Bạn có chắc muốn đăng xuất?", "Xác nhận",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
                 {
-                    e.Cancel = true;
+                   
+                    isLoggingOut = true;
                 }
                 else
                 {
-                    fLogin loginForm = new fLogin();
-                    loginForm.Show();
+                   
+                    e.Cancel = true;
                 }
             }
         }
